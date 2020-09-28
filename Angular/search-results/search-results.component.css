@@ -1,0 +1,30 @@
+.bg-red{
+    background-color: #D5202F;
+}
+.bg-white{
+    background-color: #FFFFFF;
+}
+.bg-darkred{
+    background-color: #A42832;
+}
+.bg-black{
+    background-color:#02070A;
+}
+.bg-grey{
+    background-color: #ADADAD;
+}
+.font-oswald{
+    font-family: 'Oswald', sans-serif;
+}
+label,p, nav{
+    font-family: 'Amiko', sans-serif;
+}
+
+.OnwardJourneySelect:checked + div, .ReturnJourneySelect:checked + div{
+  background-color: #99999941;
+  border-radius: 3px;
+}
+.cur{
+    cursor: pointer;
+}
+

@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row m-auto">
+        <div class="col pt-3 pb-2 px-2 border">
+            <div class="row text-center align-items-center">
+                <div class="col-4 font-oswald">
+                    <h4>{{onwardDetails.Details.FromStop.Place.City}}</h4>
+                    <p>{{onwardDetails.Details.FromStop.Place.Name}} <br>
+                    <small class="text-red">{{onwardDetails.Details.FromStop.DepartureTime | date:'dd-MMM  HH:mm'}}</small></p>
+                    
+                </div>
+                <div class="col-4">
+                    <span><i class="fas fa-arrow-right"></i></span><br>
+                    <p class="text-red">{{onwardDetails.Details.DurationHours | number: '2.0'}}:{{onwardDetails.Details.DurationMins | number: '2.0'}} Hrs</p>
+                    <p>(Rs. {{onwardDetails.Details.CostperSeat}})</p>
+                </div>
+                <div class="col-4 font-oswald">
+                    <h4>{{onwardDetails.Details.ToStop.Place.City}}</h4>
+                    <p>{{onwardDetails.Details.ToStop.Place.Name}} <br>
+                    <small class="text-red">{{onwardDetails.Details.ToStop.ArrivalTime | date:'dd-MMM  HH:mm'}}</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="col pt-3 pb-2 px-2 border" *ngIf="IsReturn">
+            <div class="row text-center align-items-center">
+                <div class="col-4 font-oswald">
+                    <h4>{{returnDetails.Details.FromStop.Place.City}}</h4>
+                    <p>{{returnDetails.Details.FromStop.Place.Name}} <br>
+                    <small class="text-red">{{returnDetails.Details.FromStop.DepartureTime | date:'dd-MMM  HH:mm'}}</small></p>
+                    
+                </div>
+                <div class="col-4">
+                    <span><i class="fas fa-arrow-right"></i></span><br>
+                    <p class="text-red">{{returnDetails.Details.DurationHours | number: '2.0'}}:{{returnDetails.Details.DurationMins | number: '2.0'}} Hrs</p>
+                    <p>(Rs. {{returnDetails.Details.CostperSeat}})</p>
+                </div>
+                <div class="col-4 font-oswald">
+                    <h4>{{returnDetails.Details.ToStop.Place.City}}</h4>
+                    <p>{{returnDetails.Details.ToStop.Place.Name}} <br>
+                    <small class="text-red">{{returnDetails.Details.ToStop.ArrivalTime | date:'dd-MMM  HH:mm'}}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-5 border mt-3" *ngIf="!UserSignedIn">
+        f
+    </div>
+    
+</div>
