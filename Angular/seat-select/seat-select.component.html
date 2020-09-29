@@ -1,0 +1,56 @@
+<button type="button" *ngIf='IsPassengerAvail' class="btn btn-secondary mx-2 rounded-0" data-toggle="modal" [attr.data-target]="'#'+'seatModel'+passenger.Id+journeyIsOnward" >
+  <span *ngIf="journeyIsOnward">
+    
+    <span>Seat: 
+      <span *ngIf="passenger.Seat == undefined" class="badge badge-danger">N</span>
+      <span *ngIf="passenger.Seat != undefined" class="badge badge-success">{{passenger.Seat}}</span>
+    </span>
+    </span>  
+  <span *ngIf="!journeyIsOnward">
+    <span>Seat: 
+      <span *ngIf="passenger.Seat2 == undefined" class="badge badge-danger">N</span>
+      <span *ngIf="passenger.Seat2 != undefined" class="badge badge-success">{{passenger.Seat2}}</span>
+    </span>
+  </span>
+  
+</button>
+
+<div *ngIf="IsPassengerAvail" class="modal fade" data-backdrop="static" data-keyboard="false" [id]="'seatModel'+passenger.Id+journeyIsOnward" tabindex="-1" [attr.aria-labelledby]="'seatModelLabel'+passenger.Id+journeyIsOnward" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" [id]="'seatModelLabel'+passenger.Id+journeyIsOnward">
+            <span *ngIf="journeyIsOnward">Onward Journey</span>
+            <span *ngIf="!journeyIsOnward">Return Journey</span>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h4 class="text-center my-3 font-oswald">Front</h4>
+          <table class="mx-auto border rounded">
+              <tr *ngFor="let x of SeatRows | numIterate, let i = index">
+                  <td *ngFor="let y of SeatMapLeft| numIterate">
+                      <label>
+                          <input type="radio" [disabled]="isDisabled((SeatInRows*i)+1+y)" class="seat" (change)="SeatChange()" [(ngModel)]="selectedSeat" [name]="'seat'+passenger.Id+journeyIsOnward" value="{{(SeatInRows*i)+1+y}}" > 
+                          <div>{{(SeatInRows*i)+1+y}}</div>
+                      </label>
+                  </td>
+                  <td></td>
+                  <td *ngFor="let z of SeatMapRight|numIterate">
+                      <label>
+                          <input type="radio" [disabled]="isDisabled((SeatInRows*i)+1+z+SeatMapLeft)" class="seat" (change)="SeatChange()" [(ngModel)]="selectedSeat" [name]="'seat'+passenger.Id+journeyIsOnward" value="{{(SeatInRows*i)+1+z+SeatMapLeft}}" >
+                          <div>{{(SeatInRows*i)+1+z+SeatMapLeft}}</div>
+                        </label>
+                  </td>
+                  
+              </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

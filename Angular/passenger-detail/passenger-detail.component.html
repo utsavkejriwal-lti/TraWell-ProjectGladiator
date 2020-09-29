@@ -1,0 +1,19 @@
+
+<div class="input-group mb-2" *ngIf="isPassenger">
+    <div class="input-group-prepend ">
+      <span class="input-group-text rounded-0">{{passenger.Id + 1}}</span>
+    </div>
+    <input type="text" placeholder="Full Name" class="form-control col-3" [(ngModel)]="passenger.Name">
+    <input type="number" placeholder="Age" class="form-control col-1" min="3" [(ngModel)]="passenger.Age" >
+    <select class="custom-select col-2" [(ngModel)]="passenger.Gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Others">Others</option>
+    </select>
+    <div class="input-group-append">
+        <button class="btn btn-danger" type="button" (click)="deleteButtonClicked()">X</button>
+        <app-seat-select [BusDetails]="OnwardBusDetails" [passengers]="passengers" [passenger]="passenger" [journeyIsOnward]="true"></app-seat-select>
+        <app-seat-select *ngIf="IsReturn" [BusDetails]="ReturnBusDetails" [passengers]="passengers" [passenger]="passenger" [journeyIsOnward]="false"></app-seat-select>
+    </div>
+</div>
+

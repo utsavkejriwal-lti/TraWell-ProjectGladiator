@@ -128,5 +128,18 @@ namespace WebAPIProjGlad.Controllers
             return "failed";
         }
 
+        [HttpPost]
+        [Route("api/User/CheckGuestUser")]
+        public string CheckGuestUser(GuestUser user)
+        {
+            if (db.Users.Any(u=> u.Email == user.Email))
+            {
+                return "Exists";
+            }
+            else
+            {
+                return "Not";
+            }
+        }
     }
 }
