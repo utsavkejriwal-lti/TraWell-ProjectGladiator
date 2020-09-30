@@ -1,0 +1,55 @@
+
+<div class="container">
+    <div class="p-5 border my-2">
+        <h4 class="text-center">
+            Total Amount to Pay: 
+            <strong>
+                &#8377;{{totalAmount}}
+            </strong>
+        </h4>
+    </div>
+
+    
+    <div class="p-5 border my-2">
+        <div class="form-check form-check-inline" *ngIf="IsLoggedIn">
+            <input class="form-check-input" [disabled]="user.Wallet <= 0" type="checkbox" value="1" (change)="walletCheck($event.target)">
+            <label class="form-check-label" for="inlineCheckbox1"><strong>Use Wallet</strong> ( Balance: &#8377;{{user.Wallet}} ) </label>
+        </div>
+
+        <hr>
+        <p><strong>Powered by PayPal</strong></p>
+        <p>Amount to pay: &#8377;{{totalAmountToPay}}</p>
+        <div class="form-group row" *ngIf="totalAmountToPay > 0">
+            <label for="paymentPage" class="col-sm-2 col-form-label">Mode of Payment</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="paymentPage" [(ngModel)]="ModeOfPayment">
+                    <option value="Card">Card</option>
+                    <option value="Net Banking">Net Banking</option>
+                    <option value="Paypal">Paypal</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-outline-success px-4" data-toggle="modal" data-target="#staticBackdrop">Pay</button>
+    </div>
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Payment Confirm</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          What do you want the payment status to be?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger">Failed</button>
+            <button type="button" class="btn btn-success" (click)="paymentConfirmClick()">Success</button>
+        </div>
+      </div>
+    </div>
+  </div>

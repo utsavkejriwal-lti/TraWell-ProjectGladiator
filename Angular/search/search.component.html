@@ -1,0 +1,66 @@
+<div class="jumbotron jumbotron-fluid bg-darkred mb-0">
+    <div class="container">
+        <div class="jumbotron bg-white">
+            <div class="container">
+              <h1 class="display-4 text-center font-oswald"><i class="fas fa-bus"></i> Search your Ride</h1>
+              <hr>
+              <form [formGroup]="searchForm" (ngSubmit)="performSearch()">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="FromCity">From</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="FromCity"><i class="fas fa-city"></i></span>
+                            </div>
+                            <input list="cities" type="text" class="form-control" placeholder="Delhi" aria-label="Username" aria-describedby="FromCity" formControlName="FromCity">
+                            <datalist id="cities">
+                              <option *ngFor="let city of placeList" [value]="city.City">{{city.City}}</option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ToCity">To</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="ToCity"><i class="fas fa-city"></i></span>
+                            </div>
+                            <input list="cities" type="text" class="form-control" placeholder="Chandigarh" aria-label="Username" aria-describedby="ToCity" formControlName="ToCity">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="departureDate">Departure</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" ><i class="fas fa-calendar-day"></i></span>
+                            </div>
+                            <input type="date" class="form-control" placeholder="Departure"  formControlName="DepDate" min="{{currentDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        <label for="returnDate">Return (Optional)</label>
+                        <div class="input-group mb-3">
+                            
+                            <div class="input-group-prepend">
+
+                              <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                            </div>
+                            <input type="date" class="form-control" placeholder="Return" formControlName="RetDate" min="{{currentDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group col-md-10">
+                       <label>Note: <strong>Tickets are not refundable</strong></label><br>
+                        <button type="submit" class="btn btn-outline-danger mb-3 px-5" [disabled] = "searchForm.invalid"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                    <div class="col-12" [innerHTML]="errorMessage"></div>
+                    
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+  </div>
