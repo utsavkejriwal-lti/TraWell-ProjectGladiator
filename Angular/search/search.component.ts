@@ -50,19 +50,14 @@ export class SearchComponent implements OnInit {
       
     });
 
-    this.searchForm.controls["FromCity"].valueChanges.subscribe((data) => {
+    this.searchForm.valueChanges.subscribe((data) => {
       if(!this.ValidateCity(data) || this.FromCity.value == this.ToCity.value){
         this.searchForm.controls['FromCity'].setErrors({'incorrect': true});
         
       }
     });
 
-    this.searchForm.controls["ToCity"].valueChanges.subscribe((data) => {
-      if(!this.ValidateCity(data) || this.ToCity.value == this.FromCity.value){
-        this.searchForm.controls['ToCity'].setErrors({'incorrect': true});
-        
-      }
-    });
+    
 
     
   }

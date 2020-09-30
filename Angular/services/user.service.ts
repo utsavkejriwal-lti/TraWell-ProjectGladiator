@@ -12,10 +12,11 @@ export class UserStatusService{
    
     public _userStatus: Subject<boolean> = new Subject<boolean>();
     public userStatussObs = this._userStatus.asObservable();
-    isLoggedIn: boolean;
+    isLoggedIn: boolean = false;
     user;
     constructor(private http: HttpClient){
        //this.user = new User();
+       this._userStatus.next(false);
        this.GetUserFromApi();
     }
 
@@ -58,6 +59,21 @@ export class UserStatusService{
             this._userStatus.next(this.isLoggedIn);
         }
         
+    }
+
+    UpdateUser(){
+        let code = {
+            EncData: sessionStorage.getItem("user")
+        }
+        this.http.post("http://localhost:52374/api/User/GetUser",code).subscribe((data) => {
+            
+            if(data != null){
+            
+                this.user = data;
+                this.isLoggedIn = true;
+                
+            }
+        })
     }
 
     

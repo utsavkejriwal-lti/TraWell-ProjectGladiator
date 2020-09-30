@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserStatusService } from '../services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   signedIn: boolean;
   user;
-  constructor(private userStatus: UserStatusService) {
+  constructor(private userStatus: UserStatusService, private router:Router) {
 
   }
 
@@ -22,4 +23,10 @@ export class NavbarComponent implements OnInit {
     this.userStatus.UpdateService();
   }
 
+  SignInButtonClick(){
+    sessionStorage.removeItem("finalDetails");
+    sessionStorage.removeItem("onwardJourney");
+    sessionStorage.removeItem("searchquery");
+    this.router.navigateByUrl('/signin');
+  }
 }

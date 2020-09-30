@@ -1,0 +1,45 @@
+.bg-red{
+    background-color: #D5202F;
+}
+.bg-white{
+    background-color: #FFFFFF;
+}
+.bg-darkred{
+    background-color: #A42832;
+}
+.bg-black{
+    background-color:#02070A;
+}
+.bg-grey{
+    background-color: #ADADAD;
+}
+.font-oswald{
+    font-family: 'Oswald', sans-serif;
+}
+.text-white{
+    color: #FFFFFF;
+}
+label,p, nav{
+    font-family: 'Amiko', sans-serif;
+}
+.list-group{
+    border: none;
+    border-radius: 0%;
+}
+.list-group-item{
+    background-color: transparent;
+    border: none;
+    border-radius: 0%;
+    color: #FFFFFF;
+}
+
+a:hover{
+    background-color:#F8F9FA;
+    color:#02070A;
+    text-decoration: none;
+}
+button:hover{
+    background-color:#F8F9FA;
+    color:#02070A;
+    text-decoration: none;
+}

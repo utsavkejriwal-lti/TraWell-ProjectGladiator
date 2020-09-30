@@ -4,6 +4,7 @@ import { FinalDetails } from '../model/FinalDetails';
 import { Transaction } from '../model/Transaction';
 import { PaymentService } from '../services/payment.service';
 import { UserStatusService } from '../services/user.service';
+import { ViewBookingService } from '../services/viewBooking.service';
 
 @Component({
   selector: 'app-payment-page',
@@ -23,18 +24,27 @@ export class PaymentPageComponent implements OnInit {
 
   ModeOfPayment: string = "Card";
 
-  constructor(private paymentService: PaymentService, private router: Router, private userService: UserStatusService) {
-    this.finalDetails = paymentService.finalDetails;
-    console.log(this.finalDetails);
-    if(this.finalDetails == undefined){
-     
-      router.navigateByUrl('bookingdetails');
-    }
+  constructor(private paymentService: PaymentService, private router: Router, private userService: UserStatusService, private viewBooking: ViewBookingService) {
+    
   }
 
   ngOnInit(): void {
+    //console.log("paymentpage");
+    this.finalDetails = this.paymentService.finalDetails;
+    //console.log(this.finalDetails);
+    if(this.finalDetails == undefined){
+      this.finalDetails = JSON.parse(sessionStorage.getItem('finalDetails'));
+      if(this.finalDetails == undefined){
+        this.router.navigateByUrl('bookingdetails');
+      }
+    }
+    
     if(this.finalDetails.Bookings.length > 1){
       this.IsReturn = true;
+    }
+    this.IsLoggedIn = this.userService.isLoggedIn;
+    if(this.IsLoggedIn){
+      this.user = this.userService.user;
     }
     this.userService.userStatussObs.subscribe((data) => {
       this.IsLoggedIn = data;
@@ -42,7 +52,7 @@ export class PaymentPageComponent implements OnInit {
         this.user = this.userService.user;
       }
     })
-    this.userService.UpdateService();
+    
 
     if(!this.IsReturn){
       this.totalAmount = this.finalDetails.Bookings[0].Amount;
@@ -115,7 +125,10 @@ export class PaymentPageComponent implements OnInit {
       }
       console.log(this.finalDetails);
       this.paymentService.finalDetails = this.finalDetails;
-
+      this.paymentService.CreateNewBooking().subscribe((data) => {
+        this.viewBooking.BookingIds = data;
+        this.router.navigateByUrl('/viewbooking');
+      })
   }
 
   AddTransaction(Mode: string, BookingDirection: string, TransType: string, Amount: number){

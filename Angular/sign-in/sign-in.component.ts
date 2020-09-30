@@ -30,6 +30,9 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.userStatusService.isLoggedIn){
+      this.router.navigateByUrl('bookingdetails');
+    }
     this.userStatusService.userStatussObs.subscribe((data) => {
       if(data){
         this.router.navigateByUrl('bookingdetails');

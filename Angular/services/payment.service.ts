@@ -18,6 +18,6 @@ export class PaymentService{
     }
 
     CreateNewBooking(){
-       // this.http.post()
+       return this.http.post("http://localhost:52374/api/booking/CreateNewBooking",this.finalDetails);
     }
 }
