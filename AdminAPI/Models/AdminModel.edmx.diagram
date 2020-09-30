@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a5b20c9937ad4ec28e5493b8d03c1735" Name="Diagram1">
+        <EntityTypeShape EntityType="TraWellDummyModel.Admin" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Booking" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Bus" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.GuestUser" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.PassengerDetail" Width="1.5" PointX="12.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Place" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Route" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Stop" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Transaction" Width="1.5" PointX="12.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Trip" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.TripStop" Width="1.5" PointX="13.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TraWellDummyModel.User" Width="1.5" PointX="8.25" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Buses__Admin__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Routes__Admin__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Trips__Admin__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Bookings__GuestI__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Bookings__TripId__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Bookings__UserId__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Passenger__Booki__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Transacti__Booki__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Trips__BusID__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Routes__Destinat__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Routes__Source__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Stops__Stop__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__TripStops__Stop__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Stops__RouteID__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Trips__RouteID__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="TraWellDummyModel.FK__TripStops__TripI__4D94879B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TraWellDummyModel.Feedback" Width="1.5" PointX="15.75" PointY="4" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Feedback__Bookin__73BA3083" />
+        <AssociationConnector Association="TraWellDummyModel.FK__Feedback__BusID__74AE54BC" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
