@@ -1,57 +1,39 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
- 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a routerLink="/dashboard" class="nav-link" >Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a  routerLink="/manageroutes" class="nav-link" type="button">Manage Routes</a>
-        </li>
-        
-        <li class="nav-item">
-          <a  routerLink="/managebuses" class="nav-link" type="button">Manage Buses</a>       
-        </li>
-
-        <li class="nav-item">
-          <a  routerLink="/managetrips" class="nav-link" type="button">Manage Trips</a>
-        </li>
-      </ul>
-
-<div class="dropdown">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
-          Analytics
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-         
-         <a  routerLink="/frequent-routes" class="dropdown-item" type="button">Frequent Routes</a>
-         <a  routerLink="/record-profit" class="dropdown-item" type="button">Last Month Record Profit</a>
-         <a  routerLink="/reservation-details" class="dropdown-item" type="button">Reservation Details of Customers</a>
-         <a  routerLink="/preferred-bus" class="dropdown-item" type="button">Most preferred Bus </a>
-         <a  routerLink="" class="dropdown-item" type="button">Sign Out</a>
-           
-        </div>
-      </div>
-    </div>
-    </div>
-  </nav>
 
   <div class="container">
+    <div class="my-3">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#insertTrip" aria-expanded="false" aria-controls="insertTrip">
+           Insert Route
+          </button>
+          <div class="collapse" id="insertTrip">
+            <div class="card card-body">
+                <button class="btn btn-info mb-3" (click)="AddStop()">Add Stop</button>
+                <small>Insert in acsending order of Distance</small>
+                <div class="input-group mt-3" *ngFor="let stop of InsertRoutesStops; let i = index;">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">{{i+1}}</span>
+                    </div>
+                    <input type="text" class="form-control" list="cities" [(ngModel)]="stop.Stop1" placeholder="Stop">
+                    <input type="number" class="form-control" [(ngModel)]="stop.DistanceFromOrigin" placeholder="Distance from origin">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-danger" type="button" (click)="removeStop(i)">X</button>
+                    </div>
+                </div>
+                <datalist id="cities">
+                    <option *ngFor="let city of placeList" [value]="city.Code">{{city.Name}} , {{city.City}}</option>
+                  </datalist>
+                  <button *ngIf="this.InsertRoutesStops.length > 2" (click)="AddRoute()" class="btn btn-success my-3">Add Route</button>
+                <p *ngIf="routeMessage" [innerHTML]="routeMessage"></p>
+            </div>
+          </div>
+          
+      </div>
       <table class = "table table-bordered">
           <tr>
               <th>Id</th>
               <th>Source</th>
               <th>Destination</th>
               <th>Admin</th>
-              
-             
-              
           </tr>
 
           <tr *ngFor="let route of routes let i = index">
@@ -100,6 +82,8 @@
             
               </tr>
       </table>
+
+      
   </div>
 
  

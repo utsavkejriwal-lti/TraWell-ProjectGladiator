@@ -25,6 +25,9 @@ import { PreferredBusComponent } from './preferred-bus/preferred-bus.component';
 import { ManagetripsComponent } from './managetrips/managetrips.component';
 import { ManageroutesComponent } from './manageroutes/manageroutes.component';
 
+import {AdminAuthenticationService} from './services/authentication.service';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component'
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -49,7 +52,8 @@ const routes: Routes = [
     RecordProfitComponent,
     PreferredBusComponent,
     ManagetripsComponent,
-    ManageroutesComponent
+    ManageroutesComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [LoginService,ManagebusesService,ReservationdetailsService,FrequentRoutesService,
-               RecordprofitService,PreferredbusService,ManagetripsService,ManageroutesService],
+               RecordprofitService,PreferredbusService,ManagetripsService,ManageroutesService, AdminAuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

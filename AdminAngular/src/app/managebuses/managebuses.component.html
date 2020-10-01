@@ -1,50 +1,50 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
- 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a routerLink="/dashboard" class="nav-link" >Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a  routerLink="/manageroutes" class="nav-link" type="button">Manage Routes</a>
-        </li>
-        
-        <li class="nav-item">
-          <a  routerLink="/managebuses" class="nav-link" type="button" >Manage Buses</a>       
-        </li>
 
-        <li class="nav-item">
-          <a  routerLink="/managetrips" class="nav-link" type="button">Manage Trips</a>
-        </li>
-      </ul>
-
-<div class="dropdown">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
-          Analytics
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-         
-         <a  routerLink="/frequent-routes" class="dropdown-item" type="button">Frequent Routes</a>
-         <a  routerLink="/record-profit" class="dropdown-item" type="button">Last Month Record Profit</a>
-         <a  routerLink="/reservation-details" class="dropdown-item" type="button">Reservation Details of Customers</a>
-         <a  routerLink="/preferred-bus" class="dropdown-item" type="button">Most preferred Bus </a>
-         <a  routerLink="" class="dropdown-item" type="button">Sign Out</a>
-           
-        </div>
+<div class= "container">
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <button class="btn btn-success">Insert Bus</button>
+          </button>
+        </h2>
       </div>
-    </div>
-    </div>
-  </nav>
+  
+    
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+    <label >Number</label>
+    <input type="text" class="form-control" [(ngModel)]="bus.Number">
+    <label>Name</label>
+    <input type="text" class="form-control" [(ngModel)]="bus.Name">
+    <label >Seats</label>
+    <input type="text" class="form-control" [(ngModel)]="bus.Seats">
+    <label>hasAc</label>
+    <input type="text" class="form-control" [(ngModel)]="bus.hasAc">
+    <label>hasWifi</label>
+    <input type="text" class="form-control" [(ngModel)]="bus.hasWifi">
+    <label>isRecliner</label>
+    <input type="text" class="form-control" [(ngModel)]="bus.isRecliner">
+    <label >Admin</label>
+    <input type="text" class="form-control" [(ngModel)]="bus.Admin">
+    <button class="btn btn-primary mt-2 px-3"  (click)="InsertBus()">Save</button>
+  </div>
+</div>
+</div>
+</div>
+<p *ngIf="message && message.Name == bus.Name" class="text-success">
+    Bus Inserted
+</p>
+</div>
+
+
+
   <div class="container">
     <table class="table table-bordered">
     
     <tr>
+      <th>Bus ID</th>
     <th> Number</th>
     
     <th> Name </th>
@@ -58,6 +58,7 @@
 
   
       <tr *ngFor="let bus of buses; let i = index">
+        <td>{{bus.Id}}</td>
         <td>{{bus.Number}}</td>
         <td>{{bus.Name}} </td>
         <td>{{bus.Seats}}</td>
@@ -84,7 +85,7 @@
                 <label>Name</label>
                 <input type="text" class="form-control" [(ngModel)]="bus.Name">
                 <label >Seats</label>
-                <input type="text" class="form-control" [(ngModel)]="bus.Seats">
+                <input type="text" class="form-control" readonly [(ngModel)]="bus.Seats">
                 <label>hasAc</label>
                 <input type="text" class="form-control" [(ngModel)]="bus.hasAc">
                 <label>hasWifi</label>
@@ -92,16 +93,17 @@
                 <label>isRecliner</label>
                 <input type="text" class="form-control" [(ngModel)]="bus.isRecliner">
                 <label >Admin</label>
-                <input type="text" class="form-control" [(ngModel)]="bus.Admin">
+                <input type="text" class="form-control" readonly [(ngModel)]="bus.Admin">
                 <br>
             <button class="btn btn-primary" value="{{i}}" (click)="EditBus($event.target.value)">Save</button>  
+            <p *ngIf="message" class="text-danger">
+              Bus Edited
+          </p> 
            </div>
           </div>
         </div> 
         </div>
-        <p *ngIf="message" class="text-danger">
-          Bus Edited
-      </p>        
+             
     </td>
        
       </tr>
@@ -112,41 +114,7 @@
     </table>
 
 
-    <div class="accordion" id="accordionExample">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h2 class="mb-0">
-            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <button class="btn btn-success">Insert Bus</button>
-            </button>
-          </h2>
-        </div>
-    
-      
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body">
-      <label >Number</label>
-      <input type="text" class="form-control" [(ngModel)]="bus.Number">
-      <label>Name</label>
-      <input type="text" class="form-control" [(ngModel)]="bus.Name">
-      <label >Seats</label>
-      <input type="text" class="form-control" [(ngModel)]="bus.Seats">
-      <label>hasAc</label>
-      <input type="text" class="form-control" [(ngModel)]="bus.hasAc">
-      <label>hasWifi</label>
-      <input type="text" class="form-control" [(ngModel)]="bus.hasWifi">
-      <label>isRecliner</label>
-      <input type="text" class="form-control" [(ngModel)]="bus.isRecliner">
-      <label >Admin</label>
-      <input type="text" class="form-control" [(ngModel)]="bus.Admin">
-      <button class="btn btn-primary mt-2 px-3"  (click)="InsertBus()">Save</button>
-    </div>
-  </div>
-</div>
-  </div>
-  <p *ngIf="message && message.Name == bus.Name" class="text-success">
-      Bus Inserted
-  </p>
+  
 
     </div>
     

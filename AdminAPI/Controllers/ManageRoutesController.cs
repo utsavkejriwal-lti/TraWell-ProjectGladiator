@@ -24,11 +24,13 @@ namespace AdminWebAPI.Controllers
             {
                 ManageRoutes manage = new ManageRoutes();
                 manage.route = route;
-                manage.stops = db.Stops.Where(ts => ts.RouteID == route.Id).ToList();
+                manage.stops = db.Stops.Where(ts => ts.RouteID == route.Id).OrderBy(t => t.DistanceFromOrigin).ToList();
                 ManageRoute.Add(manage);
             }
 
             return ManageRoute;
         }
+
+        
     }
 }

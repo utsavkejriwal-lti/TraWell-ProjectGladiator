@@ -145,7 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddRouteController.cs" />
     <Compile Include="Controllers\FrequentRoutesController.cs" />
+    <Compile Include="Controllers\GetPlacesController.cs" />
     <Compile Include="Controllers\LastMonthProfitController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageBusesController.cs" />

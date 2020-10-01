@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecordProfit } from '../models/recordProfit';
+import { AdminAuthenticationService } from '../services/authentication.service';
 import { RecordprofitService } from '../services/RecordprofitService';
 
 
@@ -14,7 +16,7 @@ export class RecordProfitComponent implements OnInit {
   totalAmount: number = 0;
 
 
-  constructor(private recordprofitService:RecordprofitService) {
+  constructor(private recordprofitService:RecordprofitService,private adminAuth: AdminAuthenticationService, private router: Router) {
     this.detail = new RecordProfit();
    }
 
@@ -26,6 +28,16 @@ export class RecordProfitComponent implements OnInit {
         this.totalAmount=0;
       for(var i=0; i< this.details.length; i++){
         this.totalAmount += this.details[i].Amount;
+      }
+    })
+
+    if(!this.adminAuth.isLoggedIn){
+      this.router.navigate(['/']); 
+    }
+    this.adminAuth.adminStatussObs.subscribe((data) => {
+      
+      if(!data){
+        this.router.navigate(['/']); 
       }
     })
   }

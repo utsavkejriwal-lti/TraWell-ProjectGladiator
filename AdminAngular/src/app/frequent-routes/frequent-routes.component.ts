@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FrequentRoutes } from '../models/frequentRoutes';
+import { AdminAuthenticationService } from '../services/authentication.service';
 import { FrequentRoutesService } from '../services/FrequentroutesService';
 
 
@@ -12,7 +14,7 @@ export class FrequentRoutesComponent implements OnInit {
   detail: FrequentRoutes;
   details
 
-  constructor(private frequentRoutesService:FrequentRoutesService) {
+  constructor(private frequentRoutesService:FrequentRoutesService ,private adminAuth: AdminAuthenticationService, private router: Router) {
     this.detail = new FrequentRoutes();
    }
 
@@ -21,6 +23,16 @@ export class FrequentRoutesComponent implements OnInit {
   ngOnInit(): void {
     this.frequentRoutesService.getAllDetailsFromAPI().subscribe((data)=>{
       this.details = data;
+    })
+
+    if(!this.adminAuth.isLoggedIn){
+      this.router.navigate(['/']); 
+    }
+    this.adminAuth.adminStatussObs.subscribe((data) => {
+      
+      if(!data){
+        this.router.navigate(['/']); 
+      }
     })
   }
 

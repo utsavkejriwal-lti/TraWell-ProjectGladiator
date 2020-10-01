@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AdminAuthenticationService } from '../services/authentication.service';
 
 import { ManagetripsService } from '../services/ManagetripsService';
 
@@ -14,7 +16,7 @@ export class ManagetripsComponent implements OnInit {
   // trip: Managetrips;
   
 
-  constructor(private managetripsService:ManagetripsService) { 
+  constructor(private managetripsService:ManagetripsService,private adminAuth: AdminAuthenticationService, private router: Router) { 
     // this.trip= new Managetrips();
 
   }
@@ -26,6 +28,16 @@ export class ManagetripsComponent implements OnInit {
       console.log(data);
       this.trips = data;
       
+    })
+
+    if(!this.adminAuth.isLoggedIn){
+      this.router.navigate(['/']); 
+    }
+    this.adminAuth.adminStatussObs.subscribe((data) => {
+      
+      if(!data){
+        this.router.navigate(['/']); 
+      }
     })
   }
 
