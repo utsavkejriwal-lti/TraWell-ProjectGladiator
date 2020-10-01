@@ -1,0 +1,22 @@
+<div> 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 bg-darkred ">
+              <div class="py-2 text-white">
+                 <h3 class="display-5 my-4 text-center font-oswald">Dashboard</h3>
+                 <hr>
+                 <div class="list-group mb-5 text-center">
+                    <a routerLink="profile" class="list-group-item">Profile</a>
+                  <a routerLink="changePassword" class="list-group-item">Change Password</a>
+                  <button class="list-group-item" (click)="manageBookingsClick()">My Bookings</button>
+                  <a routerLink="wallet" class="list-group-item">Wallet</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9 py-5">
+                
+               <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

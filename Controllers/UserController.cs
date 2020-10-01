@@ -34,6 +34,23 @@ namespace WebAPIProjGlad.Controllers
                 {
                     db.Users.Add(user);
                     db.SaveChanges();
+                    if (db.GuestUsers.Any(gu => gu.Email.ToLower() == user.Email.ToLower() && gu.Contact == user.Contact))
+                    {
+                        GuestUser guestUser = db.GuestUsers.Where(gu => gu.Email.ToLower() == user.Email.ToLower() && gu.Contact == user.Contact).First();
+                        if(db.Bookings.Any(b => b.GuestId == guestUser.Id))
+                        {
+                            foreach (Booking booking in db.Bookings.Where(b => b.GuestId == guestUser.Id))
+                            {
+                                booking.UserRegistered = 1;
+                                booking.UserId = user.Id;
+                                booking.GuestId = null;
+                                db.Entry(booking).State = System.Data.Entity.EntityState.Modified;
+                            }
+                        }
+                        db.Entry(guestUser).State = System.Data.Entity.EntityState.Deleted;
+                        db.SaveChanges();
+                    }
+                   
                     return "Added";
                 }
                 else
@@ -109,13 +126,19 @@ namespace WebAPIProjGlad.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/User/GetTransactions")]
+        public List<Transaction> GetTransactions(int id)
+        {
+            return db.Transactions.Where(t => t.Booking.UserId == id && t.Mode=="Wallet").ToList();
+        }
 
         [HttpPost]
         [Route("api/User/ChangePass")]
         public string ChangePass(UserChangePass user)
         {
             
-           if (user.Password == user.NewPassword && 
+           if (user.Password != user.NewPassword && 
                db.Users.Any(x => x.Email.ToLower() == user.Email.ToLower() && x.Password == user.Password))
                {
                 User userDetails = db.Users.Where(x => x.Email.ToLower() == user.Email.ToLower() && x.Password == user.Password).First();
@@ -140,6 +163,41 @@ namespace WebAPIProjGlad.Controllers
             {
                 return "Not";
             }
+        }
+
+        [HttpPost]
+        [Route("api/User/UpdateUser")]
+
+        public string UpdateUser(User user)
+        {
+            if(db.Users.Any(u => u.Id == user.Id))
+            {
+                User previousUser = db.Users.Where(u => u.Id == user.Id).First();
+                if(previousUser.Contact != user.Contact)
+                {
+                    previousUser.Contact = user.Contact;
+                }
+
+                if(previousUser.DOB != user.DOB)
+                {
+                    previousUser.DOB = user.DOB;
+                }
+
+                if(previousUser.Address != user.Address)
+                {
+                    previousUser.Address = user.Address;
+                }
+
+                if(previousUser.Gender != user.Gender)
+                {
+                    previousUser.Gender = user.Gender;
+                }
+
+                db.Entry(previousUser).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return "Updated";
+            }
+            return "Not Found";
         }
     }
 }

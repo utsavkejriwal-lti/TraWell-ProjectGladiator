@@ -10,12 +10,24 @@
 .bg-black{
     background-color:#02070A;
 }
-.bg-Grey{
+.bg-grey{
     background-color: #ADADAD;
 }
 .font-oswald{
     font-family: 'Oswald', sans-serif;
 }
-label,p, nav{
-    font-family: 'Amiko', sans-serif;
+.text-red{
+    color: #D5202F;
+}
+.text-white{
+    color: #FFFFFF;
+}
+.text-darkred{
+    color: #A42832;
+}
+.text-black{
+    color:#02070A;
+}
+.text-grey{
+    color: #ADADAD;
 }
