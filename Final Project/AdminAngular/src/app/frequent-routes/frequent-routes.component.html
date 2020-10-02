@@ -1,0 +1,19 @@
+
+
+   <h1 class="text-center my-3">Frequent Routes</h1>
+   <hr>
+
+  <div class="container">
+    <button class="btn btn-warning my-4" (click)="UpdateDetails()">Update Details</button>
+      <table class="table table-bordered">
+          <tr>
+              <th>Route Id</th>
+              <th>No Of Trips</th>
+          </tr>
+
+          <tr *ngFor="let detail of details">
+              <td>{{detail.routeid}}</td>
+              <td>{{detail.TotalTrips}}</td>
+          </tr>
+      </table>
+  </div>

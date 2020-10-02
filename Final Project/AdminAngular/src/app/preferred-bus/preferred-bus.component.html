@@ -1,0 +1,22 @@
+
+  <h1 class="text-center mt-4 font-oswald">Most Preferred Bus</h1>
+  <hr>
+
+  <div class= "container">
+    <button class="btn btn-warning my-4" (click)="UpdateDetails()">Update Details</button>
+      <table class="table table-bordered">
+          <tr>
+              <th>Bus ID</th>
+              <th>Bus Name</th>
+              <th>Bus Number</th>
+              <th>Feedback Of Bus</th>
+          </tr>
+
+          <tr *ngFor="let detail of details">
+              <td>{{detail.busid}}</td>
+              <td>{{detail.Name}}</td>
+              <td>{{detail.Number}}</td>
+              <td>{{detail.feedbackBus}}</td>
+              </tr>
+      </table>
+  </div>

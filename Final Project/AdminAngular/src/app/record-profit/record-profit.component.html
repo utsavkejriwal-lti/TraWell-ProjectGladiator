@@ -1,0 +1,30 @@
+
+   <h1 class="text-center my-3">Last Month Record Earnings <span *ngIf="details">({{'2020-' + details[0].LastMonth | date : 'MMMM'}})</span> </h1>
+   <hr>
+
+  <div class="container">
+    <button class="btn btn-warning my-4" (click)="UpdateDetails()">Update Details</button>
+      <table class="table table-bordered">
+          <tr>
+              <th>Booking Id</th>
+              <th>User Id</th>
+              <th>Guest Id</th>
+              
+              <th>Amount</th>
+          </tr>
+
+          <tr *ngFor="let detail of details">
+              <td>{{detail.BookingID}}</td>
+              <td>{{detail.UserId}}</td>
+              <td>{{detail.GuestId}}</td>
+             
+              <td>{{detail.Amount}}</td>
+          </tr>
+          <tr>
+              <td colspan="3" class="text-right">Total</td>
+              <td>{{totalAmount}}</td>
+          </tr>
+      </table>
+
+      
+  </div>

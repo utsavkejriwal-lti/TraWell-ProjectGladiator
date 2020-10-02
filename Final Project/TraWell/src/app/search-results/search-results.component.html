@@ -1,0 +1,146 @@
+<div class="container mt-3">
+    
+    <div class="row">
+        <div class="col-md col-sm-12" >
+            <div class="mx-1 py-3 px-4 bg-red rounded font-oswald">
+                <div class="row">
+                  <div class="col-8">
+                    {{toquery.FromCity}} <i class="fas fa-arrow-right"></i> {{toquery.ToCity}}
+                  </div>
+                  <div class="col-4">
+                    {{toquery.DepDate | date:'mediumDate'}}
+                  </div>
+                </div>
+            </div>
+            <div class="my-2 mx-1" *ngIf="toresult && validData1; else noOnwardResult">
+                <form>
+                    <label style="width: 100%;" *ngFor="let result of toresult; let i = index">         
+                        <div class="card">
+                          <div class="card-body">
+                            <input type="radio" name="OnwardJourneySelect" class="OnwardJourneySelect" value="{{i}}" [(ngModel)]="OnwardSelected">
+                            <div class="busDetails py-2">
+                            <div class="row">
+                              <div class="col-4 text-center">
+                                {{result.Searches[OnwardSearchResultSelected[i].sP].FromStop.Place.City}} <br> <small>{{result.Searches[OnwardSearchResultSelected[i].sP].FromStop.DepartureTime | date:'dd-MMM  HH:mm'}}</small>
+                              </div>
+                              <div class="col-4 text-center">
+                                <i class="fas fa-arrow-right"></i> <br> <small>{{result.Searches[OnwardSearchResultSelected[i].sP].DurationHours | number: '2.0'}}:{{result.Searches[OnwardSearchResultSelected[i].sP].DurationMins | number: '2.0'}} hrs</small>
+                              </div>
+                              <div class="col-4 text-center">
+                                {{result.Searches[OnwardSearchResultSelected[i].sP].ToStop.Place.City}} <br> <small>{{result.Searches[OnwardSearchResultSelected[i].sP].ToStop.ArrivalTime | date:'dd-MMM  HH:mm'}}</small>
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row justify-content-center">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                         <label for="{{i}}dropPoints"><small>Boarding and Drop Point:</small></label>
+                                        <select class="form-control" name="{{i}}Onward" (change)="OnwardSelectChange($event.target)">
+                                            <option *ngFor="let search of result.Searches; let j = index" value="{{j}}">
+                                            {{search.FromStop.Place.Name}} - {{search.ToStop.Place.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-2 text-center border-right">
+                                <i class="fas fa-chair"></i> {{result.Searches[OnwardSearchResultSelected[i].sP].SeatAvailable}}
+                              </div>
+                              <div class="col-6 text-center border-right" *ngIf="result.BusDetails.hasAc == 1 || result.BusDetails.isRecliner == 1|| result.BusDetails.hasWifi == 1">
+                                <span *ngIf="result.BusDetails.isRecliner == 1">Rec</span> &nbsp;<span *ngIf="result.BusDetails.hasAc == 1"><i class="fas fa-snowflake"></i> AC</span> &nbsp; <span *ngIf="result.BusDetails.hasWifi == 1"><i class="fas fa-wifi"></i>Wifi</span> 
+                              </div>
+                              <!-- <div class="col-2 text-center border-right">
+                                <i class="fas fa-star"></i> 4.2
+                              </div> -->
+                              <div class="col-4 text-center">
+                                <h4><strong>Rs. {{result.Searches[OnwardSearchResultSelected[i].sP].CostperSeat}}</strong></h4>
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                </form>
+            </div>
+            <ng-template #noOnwardResult>
+                <div class="alert alert-info mx-1 my-3" role="alert" >
+                   No Results found
+                  </div>
+            </ng-template>
+        </div>
+        <div class="col-md col-sm-12" *ngIf="returnSearch">
+            <div class="mx-1 py-3 px-4 bg-red rounded font-oswald">
+                <div class="row">
+                  <div class="col-8">
+                    {{returnquery.FromCity}} <i class="fas fa-arrow-right"></i> {{returnquery.ToCity}}
+                  </div>
+                  <div class="col-4">
+                    {{returnquery.DepDate | date:'mediumDate'}}
+                  </div>
+                </div>
+            </div>
+            <div class="my-2 mx-1" *ngIf="returnresult && validData2; else noReturnResult">
+                <form>
+                    <label style="width: 100%;" *ngFor="let result of returnresult; let i = index">         
+                        <div class="card">
+                          <div class="card-body">
+                            <input type="radio" name="ReturnJourneySelect" class="ReturnJourneySelect" value="{{i}}" [(ngModel)]="ReturnSelected">
+                            <div class="busDetails py-2">
+                            <div class="row">
+                              <div class="col-4 text-center">
+                                {{result.Searches[ReturnSearchResultSelected[i].sP].FromStop.Place.City}} <br> <small>{{result.Searches[ReturnSearchResultSelected[i].sP].FromStop.DepartureTime | date:'dd-MMM  HH:mm'}}</small>
+                              </div>
+                              <div class="col-4 text-center">
+                                <i class="fas fa-arrow-right"></i> <br> <small>{{result.Searches[ReturnSearchResultSelected[i].sP].DurationHours | number: '2.0'}}:{{result.Searches[ReturnSearchResultSelected[i].sP].DurationMins | number: '2.0'}} hrs</small>
+                              </div>
+                              <div class="col-4 text-center">
+                                {{result.Searches[ReturnSearchResultSelected[i].sP].ToStop.Place.City}} <br> <small>{{result.Searches[ReturnSearchResultSelected[i].sP].ToStop.ArrivalTime | date:'dd-MMM  HH:mm'}}</small>
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row justify-content-center">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                         <label for="{{i}}dropPoints"><small>Boarding and Drop Point:</small></label>
+                                        <select class="form-control" name="{{i}}Return" (change)="ReturnSelectChange($event.target)">
+                                            <option *ngFor="let search of result.Searches; let j = index" value="{{j}}">
+                                            {{search.FromStop.Place.Name}} - {{search.ToStop.Place.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-2 text-center border-right">
+                                <i class="fas fa-chair"></i> {{result.Searches[ReturnSearchResultSelected[i].sP].SeatAvailable}}
+                              </div>
+                              <div class="col-6 text-center border-right" *ngIf="result.BusDetails.hasAc == 1 || result.BusDetails.isRecliner == 1|| result.BusDetails.hasWifi == 1">
+                                <span *ngIf="result.BusDetails.isRecliner == 1">Rec</span> &nbsp;<span *ngIf="result.BusDetails.hasAc == 1"><i class="fas fa-snowflake"></i> AC</span> &nbsp; <span *ngIf="result.BusDetails.hasWifi == 1"><i class="fas fa-wifi"></i>Wifi</span> 
+                              </div>
+                              <!-- <div class="col-2 text-center border-right">
+                                <i class="fas fa-star"></i> 4.2
+                              </div> -->
+                              <div class="col-4 text-center">
+                                <h4><strong>Rs. {{result.Searches[ReturnSearchResultSelected[i].sP].CostperSeat}}</strong></h4>
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                </form>
+            </div>
+            <ng-template #noReturnResult>
+                <div class="alert alert-info mx-1 my-3" role="alert" >
+                   No Results found.
+                   <span *ngIf="validData1"><strong (click)="proceedOneWay()" class="cur">Click Here</strong> to proceed with one way</span>
+                  </div>
+            </ng-template>
+        </div>
+        <button (click)="ProceedButton()" class="btn btn-block bg-red my-2 col-12 mx-1 font-oswald" [disabled]="!(validData1 && ((validData2 && returnSearch) || (!validData2 && !returnSearch)))">Proceed</button>
+    </div>
+</div>
+

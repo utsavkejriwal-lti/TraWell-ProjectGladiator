@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="IsLoggedIn">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/dashboard">
+        <img src="../../assets/Logo.png"  height="50" alt="" loading="lazy">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a routerLink="/dashboard" class="nav-link" >Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a  routerLink="/manageroutes" class="nav-link" type="button">Manage Routes</a>
+        </li>
+        
+        <li class="nav-item">
+          <a  routerLink="/managebuses" class="nav-link" type="button">Manage Buses</a>       
+        </li>
+
+        <li class="nav-item">
+          <a  routerLink="/managetrips" class="nav-link" type="button">Manage Trips</a>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
+                  Analytics
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+         
+                    <a  routerLink="/frequent-routes" class="dropdown-item" type="button">Frequent Routes</a>
+                    <a  routerLink="/record-profit" class="dropdown-item" type="button">Last Month Record Profit</a>
+                    <a  routerLink="/reservation-details" class="dropdown-item" type="button">Reservation Details of Customers</a>
+                    <a  routerLink="/preferred-bus" class="dropdown-item" type="button">Most preferred Bus </a>
+                    </div>
+            </div>
+        </li>
+      </ul>
+
+<div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
+          Hello <strong>{{admin.Username}}</strong>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+         
+      
+         <button  (click)="signout()" class="dropdown-item" type="button">Sign Out</button>
+           
+        </div>
+      </div>
+    </div>
+    </div>
+  </nav>

@@ -1,0 +1,50 @@
+
+
+td{
+    width: 50px;
+    height: 50px;
+}
+label{
+    font-family: 'Amiko', sans-serif;
+    width: 100%;
+    height: 100%;
+}
+label input{
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+}
+label div{
+    padding-top: 3px;
+    width: 60%;
+    height: 60%;
+    margin: auto;
+    text-align: center;
+    background-color: #ADADAD;
+}
+.font-oswald{
+    font-family: 'Oswald', sans-serif;
+}
+.seat:checked + div{
+    background-color: green;
+}
+
+.seat:disabled + div{
+    background-color: red;
+}
+
+.bg-red{
+    background-color: #D5202F;
+}
+.bg-white{
+    background-color: #FFFFFF;
+}
+.bg-darkred{
+    background-color: #A42832;
+}
+.bg-black{
+    background-color:#02070A;
+}
+.bg-grey{
+    background-color: #ADADAD;
+}

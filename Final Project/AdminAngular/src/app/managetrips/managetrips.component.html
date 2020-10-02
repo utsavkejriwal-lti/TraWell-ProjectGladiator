@@ -1,0 +1,114 @@
+
+ <h1 class="text-center my-3">Manage Trips</h1>
+ <hr>
+  <div class="container">
+
+      <div class="my-3">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#NewTripDiv" aria-expanded="false" aria-controls="collapseExample">
+          Add Trip
+        </button>
+
+        <div class="collapse mt-2" id="NewTripDiv">
+          <div class="card card-body">
+
+            <div class="form-group">
+              <label>Select Bus</label>
+              <select class="form-control" [(ngModel)]="NewTrip.BusID" (change)="DeleteErrorMessage()">
+                <option *ngFor="let bus of Buses" value="{{bus.Id}}">{{bus.Id}}: {{bus.Name}} ({{bus.Number}})</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Cost Per Km</label>
+              <input type="number" class="form-control" placeholder="2.5" [(ngModel)]="NewTrip.CostPerKm"  (change)="DeleteErrorMessage()">
+            </div>
+            <div class="form-group">
+              <label>Select Route</label>
+              <select class="form-control" (change)="NewTripRouteChange($event.target.value)">
+                <option>Select ..</option>
+                <option *ngFor="let route of Routes" value="{{route.route.Id}}">{{route.route.Id}}: {{route.route.Place1.Name}}, {{route.route.Place1.City}} - {{route.route.Place.Name}}, {{route.route.Place.City}}</option>
+               
+              </select>
+            </div>
+            <div class="border p-3" *ngIf="NewTrip.RouteID != undefined">
+              <p class="my-3"> <strong>Trip Stops</strong></p>
+              <div *ngFor="let tripstop of this.NewTrip.TripStops" class="my-2">
+                {{tripstop.Description}}
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Arr/Dep Time</span>
+                  </div>
+                  <input type="datetime-local" class="form-control"  (change)="DeleteErrorMessage()" [min]="DateToday"  [(ngModel)]="tripstop.ArrivalTime">
+                  <input type="datetime-local" class="form-control"  (change)="DeleteErrorMessage()"  [(ngModel)]="tripstop.DepartureTime">
+                </div>
+                <hr>
+              </div>
+              <button class="my-4 btn btn-success" (click)="AddTripButton()" >Submit</button>
+              <p [innerHTML]="AddNewError"></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <table class = "table table-bordered">
+          <tr>
+              <th>Id</th>
+              <th>BusID</th>
+              <th>RouteID</th>
+              <th>Admin</th>
+              <th>CostPerKm</th>
+              <th>Status</th>
+             
+              
+          </tr>
+
+          <tr *ngFor="let trip of trips let i = index">
+             
+              <td>{{trip.trip.Id}}</td>
+              <td>{{trip.trip.BusID}}</td>
+              <td>{{trip.trip.RouteID}}</td>
+              <td>{{trip.trip.Admin}}</td>
+              <td>{{trip.trip.CostPerKm}}</td>
+              <td>{{trip.trip.Status}}</td>
+               <td>
+              <div class="accordion" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-primary">Trip Stops</button>
+                      </button>
+                    </h2>
+                </div>
+
+                <div [id]="'collapse'+i" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="container">
+                        <table class="table table-bordered">
+                           <tr>
+                           
+                            <th>Stop</th>
+                            <th>Arrival Time</th>
+                            <th>Departure Time</th>
+                           </tr>
+                           <tr  *ngFor="let tripstop of trip.tripStops">
+                               
+                            
+                            <td>{{tripstop.Place.Name}}, {{tripstop.Place.City}}</td>
+                            <td>{{tripstop.ArrivalTime |  date:'dd-MMM-yy  HH:mm'}}</td>
+                            <td>{{tripstop.DepartureTime |  date:'dd-MMM-yy  HH:mm' }}</td>
+                           </tr>
+                        </table>
+                    </div>
+                        </div>
+                </div>
+                </div>
+              </div>
+                </td>
+              
+            
+              </tr>
+      </table>
+  </div>
+
+ 

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TraWellModelStoreContainer" CdmEntityContainer="TraWellEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="TraWellModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="TraWellModel.Booking">
+        <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="UserRegistered" ColumnName="UserRegistered" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TripId" ColumnName="TripId" />
+          <ScalarProperty Name="Boarding" ColumnName="Boarding" />
+          <ScalarProperty Name="Arrival" ColumnName="Arrival" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Buses">
+      <EntityTypeMapping TypeName="TraWellModel.Bus">
+        <MappingFragment StoreEntitySet="Buses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Seats" ColumnName="Seats" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+          <ScalarProperty Name="hasAc" ColumnName="hasAc" />
+          <ScalarProperty Name="hasWifi" ColumnName="hasWifi" />
+          <ScalarProperty Name="isRecliner" ColumnName="isRecliner" />
+          <ScalarProperty Name="SeatMap" ColumnName="SeatMap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Feedbacks">
+      <EntityTypeMapping TypeName="TraWellModel.Feedback">
+        <MappingFragment StoreEntitySet="Feedback">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="BusID" ColumnName="BusID" />
+          <ScalarProperty Name="BookingFeedback" ColumnName="BookingFeedback" />
+          <ScalarProperty Name="BusFeedback" ColumnName="BusFeedback" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuestUsers">
+      <EntityTypeMapping TypeName="TraWellModel.GuestUser">
+        <MappingFragment StoreEntitySet="GuestUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PassengerDetails">
+      <EntityTypeMapping TypeName="TraWellModel.PassengerDetail">
+        <MappingFragment StoreEntitySet="PassengerDetails">
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Seat" ColumnName="Seat" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Places">
+      <EntityTypeMapping TypeName="TraWellModel.Place">
+        <MappingFragment StoreEntitySet="Places">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="City" ColumnName="City" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Routes">
+      <EntityTypeMapping TypeName="TraWellModel.Route">
+        <MappingFragment StoreEntitySet="Routes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stops">
+      <EntityTypeMapping TypeName="TraWellModel.Stop">
+        <MappingFragment StoreEntitySet="Stops">
+          <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+          <ScalarProperty Name="Stop1" ColumnName="Stop" />
+          <ScalarProperty Name="DistanceFromOrigin" ColumnName="DistanceFromOrigin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="TraWellModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="TransType" ColumnName="TransType" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="TraWellModel.Trip">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BusID" ColumnName="BusID" />
+          <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+          <ScalarProperty Name="CostPerKm" ColumnName="CostPerKm" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TripStops">
+      <EntityTypeMapping TypeName="TraWellModel.TripStop">
+        <MappingFragment StoreEntitySet="TripStops">
+          <ScalarProperty Name="TripId" ColumnName="TripId" />
+          <ScalarProperty Name="Stop" ColumnName="Stop" />
+          <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+          <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLogs">
+      <EntityTypeMapping TypeName="TraWellModel.UserLog">
+        <MappingFragment StoreEntitySet="UserLogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EncData" ColumnName="EncData" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TraWellModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prc_frequent_routes" FunctionName="TraWellModel.Store.prc_frequent_routes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TraWellModel.prc_frequent_routes_Result">
+          <ScalarProperty Name="routeid" ColumnName="routeid" />
+          <ScalarProperty Name="TotalTrips" ColumnName="TotalTrips" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prc_profit" FunctionName="TraWellModel.Store.prc_profit">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TraWellModel.prc_profit_Result">
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+          <ScalarProperty Name="LastMonth" ColumnName="LastMonth" />
+          <ScalarProperty Name="PresentYear" ColumnName="PresentYear" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prc_feedback" FunctionName="TraWellModel.Store.prc_feedback">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TraWellModel.prc_feedback_Result">
+          <ScalarProperty Name="busid" ColumnName="busid" />
+          <ScalarProperty Name="feedbackBus" ColumnName="feedbackBus" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

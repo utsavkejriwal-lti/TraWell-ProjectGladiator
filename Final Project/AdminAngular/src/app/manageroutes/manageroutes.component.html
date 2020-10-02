@@ -1,0 +1,91 @@
+
+  <h1 class="text-center my-3">Manage Routes</h1>
+  <hr>
+  <div class="container my-3">
+    <div class="my-3">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#insertTrip" aria-expanded="false" aria-controls="insertTrip">
+           Insert Route
+          </button>
+          <div class="collapse mt-3" id="insertTrip">
+            <div class="card card-body">
+                <button class="btn btn-info mb-3" (click)="AddStop()">Add Stop</button>
+                <small>Insert in acsending order of Distance</small>
+                <div class="input-group mt-3" *ngFor="let stop of InsertRoutesStops; let i = index;">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">{{i+1}}</span>
+                    </div>
+                    <input type="text" class="form-control" list="cities" [(ngModel)]="stop.Stop1" placeholder="Stop">
+                    <input type="number" class="form-control" [(ngModel)]="stop.DistanceFromOrigin" placeholder="Distance from origin">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-danger" type="button" (click)="removeStop(i)">X</button>
+                    </div>
+                </div>
+                <datalist id="cities">
+                    <option *ngFor="let city of placeList" [value]="city.Code">{{city.Name}} , {{city.City}}</option>
+                  </datalist>
+                  <button *ngIf="this.InsertRoutesStops.length > 2" (click)="AddRoute()" class="btn btn-success my-3">Add Route</button>
+                <p *ngIf="routeMessage" [innerHTML]="routeMessage"></p>
+            </div>
+          </div>
+          
+      </div>
+      <table class = "table table-bordered">
+          <tr>
+              <th>Id</th>
+              <th>Source</th>
+              <th>Destination</th>
+              <th>Admin</th>
+              <th>Stops</th>
+          </tr>
+
+          <tr *ngFor="let route of routes let i = index">
+             
+              <td>{{route.route.Id}}</td>
+              <td>{{route.route.Source}}</td>
+              <td>{{route.route.Destination}}</td>
+              <td>{{route.route.Admin}}</td>
+              
+               <td>
+              <div class="accordion" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-primary">Stops</button>
+                      </button>
+                    </h2>
+                </div>
+
+                <div [id]="'collapse'+i" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="container">
+                        <table class="table table-bordered">
+                           <tr>
+                           
+                            <th>Stop</th>
+                            <th>Distance From Origin</th>
+                            
+                           </tr>
+                           <tr  *ngFor="let stop of route.stops">
+                               
+                            
+                            <td>{{stop.Stop1}}</td>
+                            <td>{{stop.DistanceFromOrigin}}</td>
+                           
+                           </tr>
+                        </table>
+                    </div>
+                        </div>
+                </div>
+                </div>
+              </div>
+                </td>
+              
+            
+              </tr>
+      </table>
+
+      
+  </div>
+
+ 

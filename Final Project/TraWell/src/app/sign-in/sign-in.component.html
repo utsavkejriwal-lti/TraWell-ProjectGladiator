@@ -1,0 +1,38 @@
+<div class="jumbotron jumbotron-fluid bg-darkred mb-0">
+    <div class="container">
+        <div class="row justify-content-center my-md-4">
+            <div class="col-sm-6 bg-white p-5 rounded ">
+                <h1 class="display-5 text-center font-oswald">Sign In</h1>
+                <hr>
+                <form [formGroup]="signInForm">
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-at"></i></span>
+                            </div>
+                            <input formControlName="Email" type="email" class="form-control" placeholder="Email ID" aria-label="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input formControlName="Password" type="password" class="form-control" placeholder="Password" aria-label="Username">
+                        </div>
+                    </div>
+                   <br>
+                    <button type="submit" class="btn btn-outline-danger btn-block" [disabled]="signInForm.invalid" (click)="LoginButtonClick()">Login</button>
+                  </form>
+                  <div [innerHTML]='alertMessage' class="mt-3">
+
+                  </div>
+                  <hr>
+                  <!-- <p>Forgot your password? <a href="#">Reset</a></p> -->
+                  <p>Don't have an account? <a  routerLink="/signup">Register</a></p>
+            </div>
+        </div>
+    </div>
+  </div>

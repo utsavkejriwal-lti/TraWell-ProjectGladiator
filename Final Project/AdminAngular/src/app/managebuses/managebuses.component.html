@@ -1,0 +1,126 @@
+
+ <h1 class="text-center my-3">Manage Buses</h1>
+ <hr>
+<div class= "container">
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <button class="btn btn-success">Insert Bus</button>
+          </button>
+        </h2>
+      </div>
+  
+    
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+    <label >Number</label>
+    <input type="text" class="form-control" [(ngModel)]="NewBus.Number">
+    <label>Name</label>
+    <input type="text" class="form-control" [(ngModel)]="NewBus.Name">
+    <label >Seats</label>
+    <input type="text" class="form-control" [(ngModel)]="NewBus.Seats">
+    <label>AC</label>
+    <input type="text" class="form-control" [(ngModel)]="NewBus.hasAc">
+    <label>Wifi</label>
+    <input type="text" class="form-control" [(ngModel)]="NewBus.hasWifi">
+    <label>Recliner</label>
+    <input type="text" class="form-control" [(ngModel)]="NewBus.isRecliner">
+    <label>Seat Map</label>
+    <input type="text" class="form-control" [(ngModel)]="NewBus.SeatMap">
+    <label >Admin</label>
+    <input type="text" readonly class="form-control" [(ngModel)]="NewBus.Admin">
+    <button class="btn btn-primary mt-2 px-3"  (click)="InsertBus()">Save</button>
+  </div>
+</div>
+</div>
+</div>
+<p *ngIf="message && message.Name == bus.Name" class="text-success">
+    Bus Inserted
+</p>
+</div>
+
+
+
+  <div class="container">
+    <table class="table table-bordered">
+    
+    <tr>
+      <th>Bus ID</th>
+    <th> Number</th>
+    
+    <th> Name </th>
+    <th> Seats </th>
+    <th> Has AC </th>
+    <th> Has WIFI </th>
+    <th> Is Recliner </th>
+    <th>Seat Map</th>
+    <th> Admin </th>
+    <th>Edit</th>
+    </tr>
+
+  
+      <tr *ngFor="let bus of buses; let i = index">
+        <td>{{bus.Id}}</td>
+        <td>{{bus.Number}}</td>
+        <td>{{bus.Name}} </td>
+        <td>{{bus.Seats}}</td>
+        <td>{{bus.hasAc}}</td>
+        <td> {{bus.hasWifi}}</td>
+        <td> {{bus.isRecliner}}</td>
+        <td> {{bus.SeatMap}}</td>
+        <td> {{bus.Admin}}</td>
+        
+        <td>
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-warning">Edit</button>
+                  </button>
+                </h2>
+              </div>
+            
+              <div [id]="'collapse'+i" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                <label >Number</label>
+                <input type="text" class="form-control" [(ngModel)]="bus.Number">
+                <label>Name</label>
+                <input type="text" class="form-control" [(ngModel)]="bus.Name">
+                <label >Seats</label>
+                <input type="text" class="form-control" readonly [(ngModel)]="bus.Seats">
+                <label>hasAc</label>
+                <input type="text" class="form-control" [(ngModel)]="bus.hasAc">
+                <label>hasWifi</label>
+                <input type="text" class="form-control" [(ngModel)]="bus.hasWifi">
+                <label>isRecliner</label>
+                <input type="text" class="form-control" [(ngModel)]="bus.isRecliner">
+                <label>Seat Map</label>
+                <input type="text" readonly class="form-control" [(ngModel)]="bus.SeatMap">
+                
+                <br>
+            <button class="btn btn-primary" value="{{i}}" (click)="EditBus($event.target.value)">Save</button>  
+            <p *ngIf="message" class="text-danger">
+              Bus Edited
+          </p> 
+           </div>
+          </div>
+        </div> 
+        </div>
+             
+    </td>
+       
+      </tr>
+  
+    
+  
+
+    </table>
+
+
+  
+
+    </div>
+    

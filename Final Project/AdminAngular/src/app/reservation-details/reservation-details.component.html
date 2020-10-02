@@ -1,0 +1,160 @@
+
+     <h1 class="text-center mt-4 font-oswald">All Bookings</h1>
+     <hr>
+    
+    <div class="container">
+     
+      <div class="my-4">
+          <button class="btn btn-warning my-4" (click)="UpdateDetails()">Update Details</button>
+          <div class="accordion" id="AllBookings" #content>
+              <div class="card" *ngFor="let booking of Bookings; let i = index">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i" [attr.aria-controls]="'collapse'+i">
+                      <div class="row text-center">
+                          <div class="col-1">
+                              <strong>ID:</strong>{{booking.booking.BookingID}}
+                          </div>
+                          <div class="col-3">
+                              {{booking.FromStop.Place.City}} <i class="fas fa-arrow-right"></i> {{booking.ToStop.Place.City}}
+                          </div>
+                          <div class="col-4">
+                              <strong>Booking Date:</strong>   {{booking.booking.BookingDate | date:'dd-MMM-yy  HH:mm'}}
+                          </div>
+                          <div class="col-1">
+                              <i class="fas fa-user"></i> {{booking.passengers.length}}
+                          </div>
+                          <div class="col-2">
+                              <h4 *ngIf="booking.booking.Status == 'booked'"><span class="badge badge-success">Booked</span></h4>
+                              <h4 *ngIf="booking.booking.Status == 'cancelled'"><span class="badge badge-danger">Cancelled</span></h4>
+                          </div>
+                          <div class="col-1">
+                              &#8377;{{booking.booking.Amount}}
+                          </div>
+                      </div>
+                    </button>
+                  </h2>
+                </div>
+            
+                <div [id]="'collapse'+ i" class="collapse" aria-labelledby="headingOne" data-parent="#AllBookings">
+                  <div class="card-body">
+                      
+                         
+                      <div [id]="'print'+i" class="px-2">
+                      <div class="row text-center align-items-center p-2 border mx-auto">
+                          <div class="col-4 font-oswald">
+                              <h4>{{booking.FromStop.Place.City}}</h4>
+                              <p>{{booking.FromStop.Place.Name}} <br>
+                              <small class="text-red">{{booking.FromStop.DepartureTime | date:'dd-MMM  HH:mm'}}</small></p>
+                              
+                          </div>
+                          <div class="col-4 font-oswald">
+                              <p>
+                              <span><i class="fas fa-arrow-right"></i></span><br>
+                              <span><strong>Booking Id:</strong> {{booking.booking.BookingID}}</span><br>
+                              <span> <strong>Date:</strong>  {{booking.booking.BookingDate | date:'dd-MMM-yy  HH:mm'}}</span></p>
+                          </div>
+                          <div class="col-4 font-oswald">
+                              <h4>{{booking.ToStop.Place.City}}</h4>
+                              <p>{{booking.ToStop.Place.Name}} <br>
+                              <small class="text-red">{{booking.ToStop.ArrivalTime | date:'dd-MMM  HH:mm'}}</small></p>
+                          </div>
+                      </div>
+                      <div class="my-2">
+                          <h5>Passengers</h5>
+                          <table class="table table-bordered">
+                              <tr>
+                                  <th>Sr. No</th>
+                                  <th>Name</th>
+                                  <th>Age</th>
+                                  <th>Gender</th>
+                                  <th>Seat</th>
+                              </tr>
+                              <tr *ngFor="let passenger of booking.passengers; let j = index">
+                                  <td>{{j+1}}</td>
+                                  <td>{{passenger.Name}}</td>
+                                  <td>{{passenger.Age}}</td>
+                                  <td>{{passenger.Gender}}</td>
+                                  <td>{{passenger.Seat}}</td>
+                              </tr>
+                          </table>
+                      </div>
+                      <div class="my-2">
+                          <h5>Bus Details</h5>
+                          <table class="table table-bordered"> 
+                              <tr>
+                                  <th>Number</th>
+                                  <th>Name</th>
+                                  <th>Seat Map</th>
+                              </tr>
+                              <tr>
+                                  <td>{{booking.bus.Number}}</td>
+                                  <td>{{booking.bus.Name}}</td>
+                                  <td>{{booking.bus.SeatMap}}</td>
+                              </tr>
+                              
+                          </table>
+                      </div>
+                      <div class="my-2">
+                          <h5>Transactions</h5>
+                          <table class="table table-bordered">
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Amount</th>
+                                  <th>From/To</th>
+                                  <th>Type</th>
+                              </tr>
+                              <tr *ngFor="let transaction of booking.transactions">
+                                  <td>{{transaction.id}}</td>
+                                  <td>{{transaction.amount}}</td>
+                                  <td>{{transaction.Mode}}</td>
+                                  <td>{{transaction.TransType}}</td>
+                              </tr>
+                          </table>
+                      </div>
+                      
+                      <div class="my-2">
+                          <h5>Contact Details</h5>
+                          <table class="table table-bordered">
+                              <tr>
+                                  <th>Email Id</th>
+                                  <th>Phone Number</th>
+                              </tr>
+                              <tr *ngIf="booking.booking.UserRegistered == 0">
+                                  <td>{{booking.guestUser.Email}}</td>
+                                  <td>{{booking.guestUser.Contact}}</td>
+                              </tr>
+                              <tr *ngIf="booking.booking.UserRegistered == 1">
+                                  <td>{{booking.user.Email}}</td>
+                                  <td>{{booking.user.Contact}}</td>
+                              </tr>
+                          </table>
+  
+                          </div>
+                  </div>
+                  
+  
+                  <div class="my-3" *ngIf="booking.feedback.Id == 0">
+                    <div class="col-5">
+                      <Strong>Feedback:</Strong> None
+                  </div>
+                  </div>
+                  <div class="my-3" *ngIf="booking.feedback.Id != 0">
+                      <div class="col-5">
+                          <Strong>Feedback:</Strong> {{booking.feedback.BusFeedback}} <i class="fas fa-star"></i>
+                      </div>
+                  </div>
+  
+                  </div>
+                </div>
+              </div>
+             
+              
+            </div>
+      </div>
+  
+      <div class="mt-3 text-center" *ngIf="Bookings == undefined || Bookings.length == 0 || Bookings == null">
+          <p class="text-danger">No bookings to show!</p>
+      </div>
+  </div>
+  

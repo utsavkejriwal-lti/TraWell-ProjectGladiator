@@ -1,0 +1,28 @@
+<div class="row py-3 justify-content-center">
+    <div class="col-sm-11">
+        <h1 class="display-5 text-center font-oswald">Wallet Transactions</h1>
+        <hr>
+        <p><strong>Wallet Balance:</strong>{{user.Wallet}}</p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Amount</th>
+                    <th>Booking Id</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="Transactions != undefined">
+                <tr *ngFor="let transaction of Transactions">
+                   <td>{{transaction.id}}</td>
+                   <td>{{transaction.amount}}</td>
+                   <td>{{transaction.BookingID}}</td>
+                   <td>{{transaction.TransType}}</td>
+                   <td>{{transaction.TransactionDate | date:'dd-MMM  HH:mm:ss'}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

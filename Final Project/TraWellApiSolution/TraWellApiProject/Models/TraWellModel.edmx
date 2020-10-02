@@ -1,0 +1,1231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TraWellModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Bookings">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="BookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserRegistered" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="GuestId" Type="int" />
+          <Property Name="BookingDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TripId" Type="int" Nullable="false" />
+          <Property Name="Boarding" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Arrival" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Feedback" Type="varchar" MaxLength="100" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Buses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Seats" Type="int" Nullable="false" />
+          <Property Name="Admin" Type="int" Nullable="false" />
+          <Property Name="hasAc" Type="int" Nullable="false" />
+          <Property Name="hasWifi" Type="int" Nullable="false" />
+          <Property Name="isRecliner" Type="int" Nullable="false" />
+          <Property Name="SeatMap" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingID" Type="int" Nullable="false" />
+          <Property Name="BusID" Type="int" Nullable="false" />
+          <Property Name="BookingFeedback" Type="int" />
+          <Property Name="BusFeedback" Type="int" />
+        </EntityType>
+        <EntityType Name="GuestUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PassengerDetails">
+          <Key>
+            <PropertyRef Name="BookingID" />
+            <PropertyRef Name="Seat" />
+          </Key>
+          <Property Name="BookingID" Type="int" Nullable="false" />
+          <Property Name="Seat" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Routes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Destination" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Admin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stops">
+          <Key>
+            <PropertyRef Name="RouteID" />
+            <PropertyRef Name="Stop" />
+          </Key>
+          <Property Name="RouteID" Type="int" Nullable="false" />
+          <Property Name="Stop" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="DistanceFromOrigin" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BookingID" Type="int" Nullable="false" />
+          <Property Name="Mode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TransType" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusID" Type="int" Nullable="false" />
+          <Property Name="RouteID" Type="int" Nullable="false" />
+          <Property Name="Admin" Type="int" Nullable="false" />
+          <Property Name="CostPerKm" Type="float" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TripStops">
+          <Key>
+            <PropertyRef Name="TripId" />
+            <PropertyRef Name="Stop" />
+          </Key>
+          <Property Name="TripId" Type="int" Nullable="false" />
+          <Property Name="Stop" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ArrivalTime" Type="datetime" Nullable="false" />
+          <Property Name="DepartureTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EncData" Type="varchar" MaxLength="100" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Wallet" Type="int" Nullable="false" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Gender" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <Association Name="FK__Bookings__GuestI__5441852A">
+          <End Role="GuestUsers" Type="Self.GuestUsers" Multiplicity="0..1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuestUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="GuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bookings__TripId__5535A963">
+          <End Role="Trips" Type="Self.Trips" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="TripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bookings__UserId__5629CD9C">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Buses__Admin__571DF1D5">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Buses" Type="Self.Buses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buses">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__Bookin__6A30C649">
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__BusID__6B24EA82">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="BusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Passenger__Booki__5812160E">
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="1" />
+          <End Role="PassengerDetails" Type="Self.PassengerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="PassengerDetails">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Routes__Admin__59063A47">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Routes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Routes__Destinat__59FA5E80">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Routes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="Destination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Routes__Source__5AEE82B9">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Routes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="Source" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stops__RouteID__5BE2A6F2">
+          <End Role="Routes" Type="Self.Routes" Multiplicity="1" />
+          <End Role="Stops" Type="Self.Stops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Routes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stops">
+              <PropertyRef Name="RouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stops__Stop__5CD6CB2B">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="Stops" Type="Self.Stops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Stops">
+              <PropertyRef Name="Stop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Booki__5DCAEF64">
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__Admin__5EBF139D">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__BusID__5FB337D6">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="BusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__RouteID__60A75C0F">
+          <End Role="Routes" Type="Self.Routes" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Routes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="RouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TripStops__Stop__619B8048">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="TripStops" Type="Self.TripStops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TripStops">
+              <PropertyRef Name="Stop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TripStops__TripI__628FA481">
+          <End Role="Trips" Type="Self.Trips" Multiplicity="1" />
+          <End Role="TripStops" Type="Self.TripStops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TripStops">
+              <PropertyRef Name="TripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLogs__UserId__6383C8BA">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserLogs" Type="Self.UserLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLogs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="prc_feedback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prc_frequent_routes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prc_profit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="TraWellModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buses" EntityType="Self.Buses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuestUsers" EntityType="Self.GuestUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PassengerDetails" EntityType="Self.PassengerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Routes" EntityType="Self.Routes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stops" EntityType="Self.Stops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TripStops" EntityType="Self.TripStops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogs" EntityType="Self.UserLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bookings__GuestI__5441852A" Association="Self.FK__Bookings__GuestI__5441852A">
+            <End Role="GuestUsers" EntitySet="GuestUsers" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bookings__TripId__5535A963" Association="Self.FK__Bookings__TripId__5535A963">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bookings__UserId__5629CD9C" Association="Self.FK__Bookings__UserId__5629CD9C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Buses__Admin__571DF1D5" Association="Self.FK__Buses__Admin__571DF1D5">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Buses" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__Bookin__6A30C649" Association="Self.FK__Feedback__Bookin__6A30C649">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__BusID__6B24EA82" Association="Self.FK__Feedback__BusID__6B24EA82">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Passenger__Booki__5812160E" Association="Self.FK__Passenger__Booki__5812160E">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="PassengerDetails" EntitySet="PassengerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Routes__Admin__59063A47" Association="Self.FK__Routes__Admin__59063A47">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Routes__Destinat__59FA5E80" Association="Self.FK__Routes__Destinat__59FA5E80">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Routes__Source__5AEE82B9" Association="Self.FK__Routes__Source__5AEE82B9">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stops__RouteID__5BE2A6F2" Association="Self.FK__Stops__RouteID__5BE2A6F2">
+            <End Role="Routes" EntitySet="Routes" />
+            <End Role="Stops" EntitySet="Stops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stops__Stop__5CD6CB2B" Association="Self.FK__Stops__Stop__5CD6CB2B">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Stops" EntitySet="Stops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Booki__5DCAEF64" Association="Self.FK__Transacti__Booki__5DCAEF64">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__Admin__5EBF139D" Association="Self.FK__Trips__Admin__5EBF139D">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__BusID__5FB337D6" Association="Self.FK__Trips__BusID__5FB337D6">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__RouteID__60A75C0F" Association="Self.FK__Trips__RouteID__60A75C0F">
+            <End Role="Routes" EntitySet="Routes" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TripStops__Stop__619B8048" Association="Self.FK__TripStops__Stop__619B8048">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="TripStops" EntitySet="TripStops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TripStops__TripI__628FA481" Association="Self.FK__TripStops__TripI__628FA481">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="TripStops" EntitySet="TripStops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLogs__UserId__6383C8BA" Association="Self.FK__UserLogs__UserId__6383C8BA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogs" EntitySet="UserLogs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TraWellModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK__Buses__Admin__571DF1D5" FromRole="Admin" ToRole="Buses" />
+          <NavigationProperty Name="Routes" Relationship="Self.FK__Routes__Admin__59063A47" FromRole="Admin" ToRole="Routes" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__Admin__5EBF139D" FromRole="Admin" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="BookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserRegistered" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="GuestId" Type="Int32" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="Boarding" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Arrival" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Feedback" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <NavigationProperty Name="GuestUser" Relationship="Self.FK__Bookings__GuestI__5441852A" FromRole="Bookings" ToRole="GuestUsers" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK__Bookings__TripId__5535A963" FromRole="Bookings" ToRole="Trips" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Bookings__UserId__5629CD9C" FromRole="Bookings" ToRole="Users" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedback__Bookin__6A30C649" FromRole="Bookings" ToRole="Feedback" />
+          <NavigationProperty Name="PassengerDetails" Relationship="Self.FK__Passenger__Booki__5812160E" FromRole="Bookings" ToRole="PassengerDetails" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Booki__5DCAEF64" FromRole="Bookings" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seats" Type="Int32" Nullable="false" />
+          <Property Name="Admin" Type="Int32" Nullable="false" />
+          <Property Name="hasAc" Type="Int32" Nullable="false" />
+          <Property Name="hasWifi" Type="Int32" Nullable="false" />
+          <Property Name="isRecliner" Type="Int32" Nullable="false" />
+          <Property Name="SeatMap" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Admin1" Relationship="Self.FK__Buses__Admin__571DF1D5" FromRole="Buses" ToRole="Admin" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedback__BusID__6B24EA82" FromRole="Buses" ToRole="Feedback" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__BusID__5FB337D6" FromRole="Buses" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingID" Type="Int32" Nullable="false" />
+          <Property Name="BusID" Type="Int32" Nullable="false" />
+          <Property Name="BookingFeedback" Type="Int32" />
+          <Property Name="BusFeedback" Type="Int32" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK__Feedback__Bookin__6A30C649" FromRole="Feedback" ToRole="Bookings" />
+          <NavigationProperty Name="Bus" Relationship="Self.FK__Feedback__BusID__6B24EA82" FromRole="Feedback" ToRole="Buses" />
+        </EntityType>
+        <EntityType Name="GuestUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Bookings__GuestI__5441852A" FromRole="GuestUsers" ToRole="Bookings" />
+        </EntityType>
+        <EntityType Name="PassengerDetail">
+          <Key>
+            <PropertyRef Name="BookingID" />
+            <PropertyRef Name="Seat" />
+          </Key>
+          <Property Name="BookingID" Type="Int32" Nullable="false" />
+          <Property Name="Seat" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK__Passenger__Booki__5812160E" FromRole="PassengerDetails" ToRole="Bookings" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Routes" Relationship="Self.FK__Routes__Destinat__59FA5E80" FromRole="Places" ToRole="Routes" />
+          <NavigationProperty Name="Routes1" Relationship="Self.FK__Routes__Source__5AEE82B9" FromRole="Places" ToRole="Routes" />
+          <NavigationProperty Name="Stops" Relationship="Self.FK__Stops__Stop__5CD6CB2B" FromRole="Places" ToRole="Stops" />
+          <NavigationProperty Name="TripStops" Relationship="Self.FK__TripStops__Stop__619B8048" FromRole="Places" ToRole="TripStops" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Source" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Destination" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin1" Relationship="Self.FK__Routes__Admin__59063A47" FromRole="Routes" ToRole="Admin" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__Routes__Destinat__59FA5E80" FromRole="Routes" ToRole="Places" />
+          <NavigationProperty Name="Place1" Relationship="Self.FK__Routes__Source__5AEE82B9" FromRole="Routes" ToRole="Places" />
+          <NavigationProperty Name="Stops" Relationship="Self.FK__Stops__RouteID__5BE2A6F2" FromRole="Routes" ToRole="Stops" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__RouteID__60A75C0F" FromRole="Routes" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="Stop">
+          <Key>
+            <PropertyRef Name="RouteID" />
+            <PropertyRef Name="Stop1" />
+          </Key>
+          <Property Name="RouteID" Type="Int32" Nullable="false" />
+          <Property Name="Stop1" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DistanceFromOrigin" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__Stops__Stop__5CD6CB2B" FromRole="Stops" ToRole="Places" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__Stops__RouteID__5BE2A6F2" FromRole="Stops" ToRole="Routes" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BookingID" Type="Int32" Nullable="false" />
+          <Property Name="Mode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TransType" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK__Transacti__Booki__5DCAEF64" FromRole="Transactions" ToRole="Bookings" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusID" Type="Int32" Nullable="false" />
+          <Property Name="RouteID" Type="Int32" Nullable="false" />
+          <Property Name="Admin" Type="Int32" Nullable="false" />
+          <Property Name="CostPerKm" Type="Double" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Admin1" Relationship="Self.FK__Trips__Admin__5EBF139D" FromRole="Trips" ToRole="Admin" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Bookings__TripId__5535A963" FromRole="Trips" ToRole="Bookings" />
+          <NavigationProperty Name="Bus" Relationship="Self.FK__Trips__BusID__5FB337D6" FromRole="Trips" ToRole="Buses" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__Trips__RouteID__60A75C0F" FromRole="Trips" ToRole="Routes" />
+          <NavigationProperty Name="TripStops" Relationship="Self.FK__TripStops__TripI__628FA481" FromRole="Trips" ToRole="TripStops" />
+        </EntityType>
+        <EntityType Name="TripStop">
+          <Key>
+            <PropertyRef Name="TripId" />
+            <PropertyRef Name="Stop" />
+          </Key>
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="Stop" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DepartureTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__TripStops__Stop__619B8048" FromRole="TripStops" ToRole="Places" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK__TripStops__TripI__628FA481" FromRole="TripStops" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EncData" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserLogs__UserId__6383C8BA" FromRole="UserLogs" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wallet" Type="Int32" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Bookings__UserId__5629CD9C" FromRole="Users" ToRole="Bookings" />
+          <NavigationProperty Name="UserLogs" Relationship="Self.FK__UserLogs__UserId__6383C8BA" FromRole="Users" ToRole="UserLogs" />
+        </EntityType>
+        <Association Name="FK__Buses__Admin__571DF1D5">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Buses" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buses">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Routes__Admin__59063A47">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__Admin__5EBF139D">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bookings__GuestI__5441852A">
+          <End Role="GuestUsers" Type="Self.GuestUser" Multiplicity="0..1" />
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuestUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="GuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bookings__TripId__5535A963">
+          <End Role="Trips" Type="Self.Trip" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="TripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bookings__UserId__5629CD9C">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__Bookin__6A30C649">
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Passenger__Booki__5812160E">
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="1" />
+          <End Role="PassengerDetails" Type="Self.PassengerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="PassengerDetails">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Booki__5DCAEF64">
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__BusID__6B24EA82">
+          <End Role="Buses" Type="Self.Bus" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="BusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__BusID__5FB337D6">
+          <End Role="Buses" Type="Self.Bus" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="BusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Routes__Destinat__59FA5E80">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="Destination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Routes__Source__5AEE82B9">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="Source" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stops__Stop__5CD6CB2B">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="Stops" Type="Self.Stop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Stops">
+              <PropertyRef Name="Stop1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TripStops__Stop__619B8048">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="TripStops" Type="Self.TripStop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TripStops">
+              <PropertyRef Name="Stop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stops__RouteID__5BE2A6F2">
+          <End Role="Routes" Type="Self.Route" Multiplicity="1" />
+          <End Role="Stops" Type="Self.Stop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Routes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stops">
+              <PropertyRef Name="RouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__RouteID__60A75C0F">
+          <End Role="Routes" Type="Self.Route" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Routes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="RouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TripStops__TripI__628FA481">
+          <End Role="Trips" Type="Self.Trip" Multiplicity="1" />
+          <End Role="TripStops" Type="Self.TripStop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TripStops">
+              <PropertyRef Name="TripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLogs__UserId__6383C8BA">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserLogs" Type="Self.UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLogs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TraWellEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="Buses" EntityType="Self.Bus" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="GuestUsers" EntityType="Self.GuestUser" />
+          <EntitySet Name="PassengerDetails" EntityType="Self.PassengerDetail" />
+          <EntitySet Name="Places" EntityType="Self.Place" />
+          <EntitySet Name="Routes" EntityType="Self.Route" />
+          <EntitySet Name="Stops" EntityType="Self.Stop" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="Trips" EntityType="Self.Trip" />
+          <EntitySet Name="TripStops" EntityType="Self.TripStop" />
+          <EntitySet Name="UserLogs" EntityType="Self.UserLog" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Buses__Admin__571DF1D5" Association="Self.FK__Buses__Admin__571DF1D5">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Buses" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Routes__Admin__59063A47" Association="Self.FK__Routes__Admin__59063A47">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__Admin__5EBF139D" Association="Self.FK__Trips__Admin__5EBF139D">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bookings__GuestI__5441852A" Association="Self.FK__Bookings__GuestI__5441852A">
+            <End Role="GuestUsers" EntitySet="GuestUsers" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bookings__TripId__5535A963" Association="Self.FK__Bookings__TripId__5535A963">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bookings__UserId__5629CD9C" Association="Self.FK__Bookings__UserId__5629CD9C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__Bookin__6A30C649" Association="Self.FK__Feedback__Bookin__6A30C649">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Passenger__Booki__5812160E" Association="Self.FK__Passenger__Booki__5812160E">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="PassengerDetails" EntitySet="PassengerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Booki__5DCAEF64" Association="Self.FK__Transacti__Booki__5DCAEF64">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__BusID__6B24EA82" Association="Self.FK__Feedback__BusID__6B24EA82">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__BusID__5FB337D6" Association="Self.FK__Trips__BusID__5FB337D6">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Routes__Destinat__59FA5E80" Association="Self.FK__Routes__Destinat__59FA5E80">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Routes__Source__5AEE82B9" Association="Self.FK__Routes__Source__5AEE82B9">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stops__Stop__5CD6CB2B" Association="Self.FK__Stops__Stop__5CD6CB2B">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Stops" EntitySet="Stops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TripStops__Stop__619B8048" Association="Self.FK__TripStops__Stop__619B8048">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="TripStops" EntitySet="TripStops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stops__RouteID__5BE2A6F2" Association="Self.FK__Stops__RouteID__5BE2A6F2">
+            <End Role="Routes" EntitySet="Routes" />
+            <End Role="Stops" EntitySet="Stops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__RouteID__60A75C0F" Association="Self.FK__Trips__RouteID__60A75C0F">
+            <End Role="Routes" EntitySet="Routes" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TripStops__TripI__628FA481" Association="Self.FK__TripStops__TripI__628FA481">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="TripStops" EntitySet="TripStops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLogs__UserId__6383C8BA" Association="Self.FK__UserLogs__UserId__6383C8BA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogs" EntitySet="UserLogs" />
+          </AssociationSet>
+          <FunctionImport Name="prc_frequent_routes" ReturnType="Collection(TraWellModel.prc_frequent_routes_Result)" />
+          <FunctionImport Name="prc_profit" ReturnType="Collection(TraWellModel.prc_profit_Result)" />
+          <FunctionImport Name="prc_feedback" ReturnType="Collection(TraWellModel.prc_feedback_Result)" />
+        </EntityContainer>
+        <ComplexType Name="prc_frequent_routes_Result">
+          <Property Type="Int32" Name="routeid" Nullable="false" />
+          <Property Type="Int32" Name="TotalTrips" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="prc_profit_Result">
+          <Property Type="Int32" Name="BookingID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="GuestId" Nullable="true" />
+          <Property Type="Int32" Name="LastMonth" Nullable="true" />
+          <Property Type="Int32" Name="PresentYear" Nullable="true" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="prc_feedback_Result">
+          <Property Type="Int32" Name="busid" Nullable="false" />
+          <Property Type="Int32" Name="feedbackBus" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Number" Nullable="true" MaxLength="10" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TraWellModelStoreContainer" CdmEntityContainer="TraWellEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="TraWellModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="TraWellModel.Booking">
+              <MappingFragment StoreEntitySet="Bookings">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="UserRegistered" ColumnName="UserRegistered" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Boarding" ColumnName="Boarding" />
+                <ScalarProperty Name="Arrival" ColumnName="Arrival" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="TraWellModel.Bus">
+              <MappingFragment StoreEntitySet="Buses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Seats" ColumnName="Seats" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="hasAc" ColumnName="hasAc" />
+                <ScalarProperty Name="hasWifi" ColumnName="hasWifi" />
+                <ScalarProperty Name="isRecliner" ColumnName="isRecliner" />
+                <ScalarProperty Name="SeatMap" ColumnName="SeatMap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="TraWellModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="BusID" ColumnName="BusID" />
+                <ScalarProperty Name="BookingFeedback" ColumnName="BookingFeedback" />
+                <ScalarProperty Name="BusFeedback" ColumnName="BusFeedback" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestUsers">
+            <EntityTypeMapping TypeName="TraWellModel.GuestUser">
+              <MappingFragment StoreEntitySet="GuestUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PassengerDetails">
+            <EntityTypeMapping TypeName="TraWellModel.PassengerDetail">
+              <MappingFragment StoreEntitySet="PassengerDetails">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="Seat" ColumnName="Seat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="TraWellModel.Place">
+              <MappingFragment StoreEntitySet="Places">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routes">
+            <EntityTypeMapping TypeName="TraWellModel.Route">
+              <MappingFragment StoreEntitySet="Routes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stops">
+            <EntityTypeMapping TypeName="TraWellModel.Stop">
+              <MappingFragment StoreEntitySet="Stops">
+                <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+                <ScalarProperty Name="Stop1" ColumnName="Stop" />
+                <ScalarProperty Name="DistanceFromOrigin" ColumnName="DistanceFromOrigin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="TraWellModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="TransType" ColumnName="TransType" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="TraWellModel.Trip">
+              <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BusID" ColumnName="BusID" />
+                <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="CostPerKm" ColumnName="CostPerKm" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripStops">
+            <EntityTypeMapping TypeName="TraWellModel.TripStop">
+              <MappingFragment StoreEntitySet="TripStops">
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Stop" ColumnName="Stop" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogs">
+            <EntityTypeMapping TypeName="TraWellModel.UserLog">
+              <MappingFragment StoreEntitySet="UserLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EncData" ColumnName="EncData" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TraWellModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="prc_frequent_routes" FunctionName="TraWellModel.Store.prc_frequent_routes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TraWellModel.prc_frequent_routes_Result">
+                <ScalarProperty Name="routeid" ColumnName="routeid" />
+                <ScalarProperty Name="TotalTrips" ColumnName="TotalTrips" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prc_profit" FunctionName="TraWellModel.Store.prc_profit">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TraWellModel.prc_profit_Result">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+                <ScalarProperty Name="LastMonth" ColumnName="LastMonth" />
+                <ScalarProperty Name="PresentYear" ColumnName="PresentYear" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prc_feedback" FunctionName="TraWellModel.Store.prc_feedback">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TraWellModel.prc_feedback_Result">
+                <ScalarProperty Name="busid" ColumnName="busid" />
+                <ScalarProperty Name="feedbackBus" ColumnName="feedbackBus" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
