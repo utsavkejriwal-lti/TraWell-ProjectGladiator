@@ -109,7 +109,10 @@ export class BookingDetailsComponent implements OnInit {
           this.GuestAlreadyUser = false;
           this.IsGuestUser = true;
         }
-      })
+      },(error) =>{
+        this.router.navigateByUrl('/errorpage');
+      }
+      )
     }
   }
 

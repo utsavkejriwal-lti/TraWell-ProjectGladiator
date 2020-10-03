@@ -72,11 +72,13 @@ export class SearchResultsComponent implements OnInit {
       
       
       this.toresult = data;
-      console.log(data);
+     
       if(this.toresult != undefined && this.toresult.length > 0){
         this.validData1 = true;
         this.UpdateOnwardSelectedResult();
       }
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
 
 
@@ -93,6 +95,8 @@ export class SearchResultsComponent implements OnInit {
           this.validData2 = true;
           this.UpdateReturnSelectResult();
         }
+      },(error) =>{
+        this.router.navigateByUrl('/errorpage');
       })
     }
     

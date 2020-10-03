@@ -13,7 +13,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import {PlaceService} from './services/places.service';
 import {SearchQueryService} from './services/searchquery.service';
 import {TripSelectService} from './services/tripSelect.service';
-import { UserLoginService } from './services/userlogin.service';
+import {UserLoginService} from './services/userlogin.service';
 import {UserStatusService} from './services/user.service';
 import {GuestUserService} from './services/guestUser.service';
 import {PaymentService} from './services/payment.service';
@@ -26,7 +26,7 @@ import { SignOutComponent } from './sign-out/sign-out.component';
 import { PassengerDetailComponent } from './passenger-detail/passenger-detail.component';
 import { SeatSelectComponent } from './seat-select/seat-select.component';
 
-import {NumIterate} from './Pipe/numIterate.pipe';
+import { NumIterate } from './Pipe/numIterate.pipe';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { ViewBookingComponent } from './view-booking/view-booking.component';
 import { UserDashBoardComponent } from './user-dash-board/user-dash-board.component';
@@ -34,6 +34,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ViewBookingGuestComponent } from './view-booking-guest/view-booking-guest.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 
@@ -47,13 +49,16 @@ const routes: Routes = [
   { path: 'signout', component: SignOutComponent} ,
   { path: 'payment', component: PaymentPageComponent},
   { path: 'viewbooking', component: ViewBookingComponent},
+  { path: 'errorpage', component: ErrorPageComponent}, 
   { path: 'viewbookingguest', component: ViewBookingGuestComponent},
   { path: 'dashboard', component: UserDashBoardComponent , children: [
     {path: 'profile', component: UserProfileComponent},
     {path: 'wallet', component: UserWalletComponent},
     {path: 'changePassword', component: ChangePasswordComponent},
     {path: '', redirectTo: '/dashboard/profile', pathMatch: 'full'}
-  ]}  
+  ]},
+  { path: '**', component: PageNotFoundComponent}
+   
 ];
 
 @NgModule({
@@ -75,7 +80,9 @@ const routes: Routes = [
     UserProfileComponent,
     UserWalletComponent,
     ChangePasswordComponent,
-    ViewBookingGuestComponent
+    ViewBookingGuestComponent,
+    PageNotFoundComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

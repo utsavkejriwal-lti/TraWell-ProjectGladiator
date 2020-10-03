@@ -40,8 +40,10 @@ export class ViewBookingGuestComponent implements OnInit {
 
     this.http.post("http://localhost:54873/api/booking/getGuestBooking",Details).subscribe((data) => {
       this.viewBookingService.BookingIds = data;
-      console.log(data);
+
       this.router.navigateByUrl('viewbooking');
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 

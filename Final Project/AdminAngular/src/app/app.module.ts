@@ -26,7 +26,9 @@ import { ManagetripsComponent } from './managetrips/managetrips.component';
 import { ManageroutesComponent } from './manageroutes/manageroutes.component';
 
 import {AdminAuthenticationService} from './services/authentication.service';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component'
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ErrorPageComponent } from './error-page/error-page.component'
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -38,7 +40,9 @@ const routes: Routes = [
   {path:'record-profit',component:RecordProfitComponent},
   {path:'preferred-bus', component:PreferredBusComponent},
   {path:'managetrips',component:ManagetripsComponent},
-  {path:'manageroutes',component:ManageroutesComponent}
+  {path:'manageroutes',component:ManageroutesComponent},
+  {path: 'errorpage', component: ErrorPageComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
@@ -53,7 +57,9 @@ const routes: Routes = [
     PreferredBusComponent,
     ManagetripsComponent,
     ManageroutesComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    PageNotFoundComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

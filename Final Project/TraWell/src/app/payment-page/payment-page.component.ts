@@ -29,9 +29,9 @@ export class PaymentPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log("paymentpage");
+
     this.finalDetails = this.paymentService.finalDetails;
-    //console.log(this.finalDetails);
+ 
     if(this.finalDetails == undefined){
       this.finalDetails = JSON.parse(sessionStorage.getItem('finalDetails'));
       if(this.finalDetails == undefined){
@@ -127,8 +127,10 @@ export class PaymentPageComponent implements OnInit {
       this.paymentService.finalDetails = this.finalDetails;
       this.paymentService.CreateNewBooking().subscribe((data) => {
         this.viewBooking.BookingIds = data;
-        
+ 
         this.router.navigateByUrl('/viewbooking');
+      },(error) =>{
+        this.router.navigateByUrl('/errorpage');
       })
   }
 

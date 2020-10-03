@@ -4,6 +4,7 @@ import {formatDate} from '@angular/common';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { UserStatusService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ViewBookingComponent implements OnInit {
   Bookings = [];
   
 
-  constructor(private viewBookingService: ViewBookingService, private userService: UserStatusService) { 
+  constructor(private viewBookingService: ViewBookingService, private userService: UserStatusService, private router: Router) { 
     sessionStorage.removeItem("searchquery");
     sessionStorage.removeItem("finalDetails");
     sessionStorage.removeItem("onwardJourney");
@@ -26,16 +27,22 @@ export class ViewBookingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.viewBookingService.BookingIds);
+    
     this.BookingIds = this.viewBookingService.BookingIds;
-    if(this.BookingIds != undefined){
+    if(this.BookingIds != undefined && this.BookingIds.length != 0){
+     
       this.updateBookings();
     }else{
+      
       this.userService.userStatussObs.subscribe((data) => {
+      
         if(data){
+         
           this.viewBookingService.getBookingIds(this.userService.user.Id).subscribe((data2)=>{
             this.BookingIds = data2;
             this.updateBookings();
+          },(error) =>{
+            this.router.navigateByUrl('/errorpage');
           })
         }else{
           this.BookingIds = [];
@@ -43,7 +50,7 @@ export class ViewBookingComponent implements OnInit {
       });
       
     }
-
+   
     
   }
 
@@ -65,8 +72,10 @@ export class ViewBookingComponent implements OnInit {
     this.viewBookingService.CancelBooking(booking.BookingID).subscribe((data2) => {
       if(this.BookingIds != undefined){
         this.updateBookings();
-        this.userService.GetUserFromApi();
+       
       }
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     });
   }
 
@@ -77,10 +86,13 @@ export class ViewBookingComponent implements OnInit {
           this.viewBookingService.GetBookingDetailsFromApi(this.BookingIds).subscribe((data) => {
             if(data != undefined || data != null || data != {}){
               bookingsToInsert = data;
-              
+        
               this.Bookings = bookingsToInsert;
+              
             }
            
+          },(error) =>{
+            this.router.navigateByUrl('/errorpage');
           });
         
 
@@ -89,7 +101,7 @@ export class ViewBookingComponent implements OnInit {
   }
 
   updateFeedback(i){
-    console.log(this.Bookings[i]);
+
     var feedback = {
       BookingID: this.Bookings[i].booking.BookingID,
       BusID: this.Bookings[i].bus.Id,
@@ -98,6 +110,8 @@ export class ViewBookingComponent implements OnInit {
     }
     this.viewBookingService.insertFeedback(feedback).subscribe((data) => {
       this.updateBookings();
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 

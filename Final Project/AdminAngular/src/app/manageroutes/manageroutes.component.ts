@@ -32,10 +32,14 @@ export class ManageroutesComponent implements OnInit {
     this.manageroutesService.getAllRoutes().subscribe((data)=>{
      
       this.routes = data;
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
 
     this.manageroutesService.getAllPlaces().subscribe((data)=>{
       this.placeList = data;
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 
@@ -71,6 +75,8 @@ export class ManageroutesComponent implements OnInit {
           this.routeMessage = '<span class="text-success">Route Added</span>';
           this.routes = data;
           this.InsertRoutesStops = [];
+        },(error) =>{
+          this.router.navigateByUrl('/errorpage');
         })
       })
     }

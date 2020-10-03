@@ -36,9 +36,8 @@ export class LoginComponent {
         else{    
           this.errorMessage ="Invalid details";    
         }    
-      },    
-      error => {    
-        this.errorMessage = error.message;    
+      },(error) =>{
+        this.router.navigateByUrl('/errorpage');
       });    
   };    
  }

@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserStatusService } from '../services/user.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class UserProfileComponent implements OnInit {
   profileForm: FormGroup;
   user;
   UpdateMessage = "";
-  constructor(private userService: UserStatusService, private http: HttpClient) {
+  constructor(private userService: UserStatusService, private http: HttpClient, private router: Router) {
     
     
     
@@ -22,6 +23,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.user;
+    
     if(this.user != undefined){
       var Dob;
       if(this.user.DOB == null){
@@ -66,7 +68,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   SubmitProfileForm(){
-    console.log(this.profileForm.value);
+
     var updated = false;
     var details = {
       Id: null,
@@ -96,10 +98,17 @@ export class UserProfileComponent implements OnInit {
       details.Id = this.userService.user.Id;
       this.http.post("http://localhost:54873/api/User/UpdateUser", details).subscribe((data) => {
         if(data == "Updated"){
-          this.UpdateMessage = '<div class="alert alert-success" role="alert">Profile Details Updated </div>'
+          this.UpdateMessage = '<div class="alert alert-success" role="alert">Profile Details Updated </div>';
+          this.userService.getUser().subscribe((data2) =>{
+            this.userService.user =data2;
+          },(error) =>{
+            this.router.navigateByUrl('/errorpage');
+          });
         }else{
           this.UpdateMessage = '<div class="alert alert-danger" role="alert">Error try again later </div>'
         }
+      },(error) =>{
+        this.router.navigateByUrl('/errorpage');
       })
     }
   }

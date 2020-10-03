@@ -48,6 +48,8 @@ export class SearchComponent implements OnInit {
 
       this.placeList = data;
       
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     });
 
     this.searchForm.valueChanges.subscribe((data) => {

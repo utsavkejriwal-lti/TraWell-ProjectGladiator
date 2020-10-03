@@ -17,19 +17,13 @@ export class UserDashBoardComponent implements OnInit {
   ngOnInit(): void {
     
     
-    this.userStatusService.userStatussObs.subscribe((data) => {
-      if(!data){
-        this.router.navigateByUrl('');
-      }else{
-        this.user = this.userStatusService.user;
-      }
-      
-    })
+   
 
     if(!this.userStatusService.isLoggedIn){
       this.router.navigateByUrl('');
     }else{
       this.user = this.userStatusService.user;
+      
     }
     this.userStatusService.userStatussObs.subscribe((data) => {
       if(!data){
@@ -45,6 +39,8 @@ export class UserDashBoardComponent implements OnInit {
     this.viewBookingService.getBookingIds(this.userStatusService.user.Id).subscribe((data) => {
       this.viewBookingService.BookingIds = data;
       this.router.navigateByUrl('viewbooking');
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 

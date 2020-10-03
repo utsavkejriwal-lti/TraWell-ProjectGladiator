@@ -13,7 +13,7 @@ namespace TraWellApiProject.Models
     
     public partial class prc_frequent_routes_Result
     {
-        public int routeid { get; set; }
+        public int routeid { get; set; }  
         public Nullable<int> TotalTrips { get; set; }
     }
 }

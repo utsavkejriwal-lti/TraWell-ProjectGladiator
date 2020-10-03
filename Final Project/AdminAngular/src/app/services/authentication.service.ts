@@ -31,14 +31,4 @@ export class AdminAuthenticationService{
     }
 
     
-
-    UpdateService(){
-        if(this.isLoggedIn != undefined){
-            this._adminStatus.next(this.isLoggedIn);
-        }
-    }
-
-    
-
-    
 }

@@ -37,6 +37,8 @@ export class PreferredBusComponent implements OnInit {
   UpdateDetails(){
     this.prefferdbusService.getAllDetailsFromAPI().subscribe((data)=>{
       this.details = data;
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 

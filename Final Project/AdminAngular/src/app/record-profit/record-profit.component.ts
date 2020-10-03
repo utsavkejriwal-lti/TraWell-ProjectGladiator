@@ -43,6 +43,8 @@ export class RecordProfitComponent implements OnInit {
       for(var i=0; i< this.details.length; i++){
         this.totalAmount += this.details[i].Amount;
       }
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
 
   }

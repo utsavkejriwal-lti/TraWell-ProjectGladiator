@@ -15,23 +15,33 @@
     
       <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-    <label >Number</label>
+    <label class="mt-3">Number</label>
     <input type="text" class="form-control" [(ngModel)]="NewBus.Number">
-    <label>Name</label>
+    <label class="mt-3">Name</label>
     <input type="text" class="form-control" [(ngModel)]="NewBus.Name">
-    <label >Seats</label>
+    <label class="mt-3">Seats</label>
     <input type="text" class="form-control" [(ngModel)]="NewBus.Seats">
-    <label>AC</label>
-    <input type="text" class="form-control" [(ngModel)]="NewBus.hasAc">
-    <label>Wifi</label>
-    <input type="text" class="form-control" [(ngModel)]="NewBus.hasWifi">
-    <label>Recliner</label>
-    <input type="text" class="form-control" [(ngModel)]="NewBus.isRecliner">
-    <label>Seat Map</label>
+    <label class="mt-3">AC</label>
+    <select class="form-control" [(ngModel)]="NewBus.hasAc">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+    <label class="mt-3">Wifi</label>
+    <select class="form-control" [(ngModel)]="NewBus.hasWifi">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+    <label class="mt-3">Recliner</label>
+    <select class="form-control" [(ngModel)]="NewBus.isRecliner">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+    <label class="mt-3">Seat Map</label>
     <input type="text" class="form-control" [(ngModel)]="NewBus.SeatMap">
-    <label >Admin</label>
-    <input type="text" readonly class="form-control" [(ngModel)]="NewBus.Admin">
+    
+    <input type="text" hidden class="form-control" [(ngModel)]="NewBus.Admin">
     <button class="btn btn-primary mt-2 px-3"  (click)="InsertBus()">Save</button>
+    <p [innerHTML]="NewBusMessage"></p>
   </div>
 </div>
 </div>

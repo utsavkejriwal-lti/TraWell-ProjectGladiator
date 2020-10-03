@@ -69,6 +69,8 @@ export class SignInComponent implements OnInit {
           sessionStorage.setItem("user",this.response.hash);
           this.userStatusService.userStatusUpdate(true);
         }
+      },(error) =>{
+        this.router.navigateByUrl('/errorpage');
       })
       
     }

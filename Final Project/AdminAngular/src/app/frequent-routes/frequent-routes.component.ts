@@ -39,6 +39,8 @@ export class FrequentRoutesComponent implements OnInit {
   UpdateDetails(){
     this.frequentRoutesService.getAllDetailsFromAPI().subscribe((data)=>{
       this.details = data;
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 }

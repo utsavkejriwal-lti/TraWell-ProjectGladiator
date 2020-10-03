@@ -201,6 +201,21 @@ namespace TraWellApiProject.Controllers
             }
             return "Not Found";
         }
+
+
+        [HttpGet]
+        [Route("api/User/update")]
+        public User GetUpdatedUser (int id)
+        {
+            if(db.Users.Any(u => u.Id == id))
+            {
+                return db.Users.Where(u => u.Id == id).First();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 
 }

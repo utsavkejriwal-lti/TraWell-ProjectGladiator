@@ -57,18 +57,24 @@ export class ManagetripsComponent implements OnInit {
       
       this.trips = data;
       console.log(data);
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
 
     this.managerouteservice.getAllRoutes().subscribe((data) => {
       
       this.Routes = data;
      
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
 
     this.managebusService.getAllBusesFromAPI().subscribe((data) => {
     
       this.Buses = data;
       this.NewTrip.BusID = data[0].Id;
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 
@@ -171,11 +177,15 @@ export class ManagetripsComponent implements OnInit {
             this.managetripsService.getAllTrips().subscribe((data)=>{
       
               this.trips = data;
+            },(error) =>{
+              this.router.navigateByUrl('/errorpage');
             })
 
           }else{
             this.AddNewError = "<span class='text-danger'>Error Processing</span>";
           }
+      },(error) =>{
+        this.router.navigateByUrl('/errorpage');
       });
     }else{
       this.AddNewError = "<span class='text-danger'>Invalid Details</span>";

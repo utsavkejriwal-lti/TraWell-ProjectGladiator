@@ -39,9 +39,11 @@ export class ReservationDetailsComponent implements OnInit {
   UpdateDetails(){
     var bookings;
     this.reservationdetailsService.GetBookingDetailsFromApi().subscribe((data)=>{
-      
+      console.log(data);
      bookings = data;
      this.Bookings = bookings;
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
   }
 

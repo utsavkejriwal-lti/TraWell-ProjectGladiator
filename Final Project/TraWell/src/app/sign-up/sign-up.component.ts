@@ -76,6 +76,8 @@ export class SignUpComponent implements OnInit {
       }else{
         this.alertMessage = '<div class="alert alert-success" role="alert"><strong>Success</strong> You are registered. Sign in to proceed</div>';
       }
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
     this.Password.reset();
     this.ConfirmPassword.reset();

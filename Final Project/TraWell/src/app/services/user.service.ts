@@ -1,8 +1,8 @@
 
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import {User} from "../model/user";
 
 
 
@@ -14,8 +14,8 @@ export class UserStatusService{
     public userStatussObs = this._userStatus.asObservable();
     isLoggedIn: boolean = false;
     user;
-    constructor(private http: HttpClient){
-       //this.user = new User();
+    constructor(private http: HttpClient, private router:Router, private http2:HttpClient){
+       
        this.GetUserFromApi();
     }
 
@@ -39,8 +39,8 @@ export class UserStatusService{
             EncData: sessionStorage.getItem("user")
         }
         this.http.post("http://localhost:54873/api/User/GetUser",code).subscribe((data) => {
-            
-            if(data != null){
+            console.log(data);
+            if(data){
             
                 this.user = data;
                 this.isLoggedIn = true;
@@ -52,12 +52,13 @@ export class UserStatusService{
                 this.isLoggedIn = false;
                 this._userStatus.next(false);
             }
-        })
+        },(error) =>{
+            this.router.navigateByUrl('/errorpage');
+          })
     }
 
-    
-
-    //UpdateUser(){}
-
+    getUser(){
+        return this.http2.get("http://localhost:54873/api/User/update?id="+this.user.Id);
+    }
     
 }
