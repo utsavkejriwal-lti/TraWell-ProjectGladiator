@@ -11,7 +11,7 @@ export class ErrorPageComponent implements OnInit {
   constructor(private userService: UserStatusService) { }
 
   ngOnInit(): void {
-    this.userService.userStatusUpdate(false);
+    
     
   }
 

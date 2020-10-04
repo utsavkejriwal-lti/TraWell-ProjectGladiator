@@ -87,10 +87,14 @@ export class ManagebusesComponent implements OnInit {
       }else{
         this.NewBus.Admin = this.adminAuth.admin.Id;
       }
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
 
     this.managebusesService.getAllBusesFromAPI().subscribe((data)=>{
       this.buses = data;
+    },(error) =>{
+      this.router.navigateByUrl('/errorpage');
     })
 
     

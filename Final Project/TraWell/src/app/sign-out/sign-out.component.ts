@@ -15,7 +15,7 @@ export class SignOutComponent implements OnInit {
 
   ngOnInit(): void {
     this.userStatusService.userStatusUpdate(false);
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/signin');
     
     
   }

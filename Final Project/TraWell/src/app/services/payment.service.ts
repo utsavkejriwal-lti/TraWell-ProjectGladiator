@@ -11,10 +11,7 @@ export class PaymentService{
    
     finalDetails: FinalDetails;
     constructor(private http: HttpClient){
-       var exists = sessionStorage.getItem("finalDetails");
-       if(exists != undefined){
-           this.finalDetails = JSON.parse(exists);
-       }
+      
     }
 
     CreateNewBooking(){

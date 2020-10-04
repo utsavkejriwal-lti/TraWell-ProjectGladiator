@@ -234,7 +234,7 @@ export class BookingDetailsComponent implements OnInit {
 
      
       this.paymentService.finalDetails = this.finalDetails;
-      sessionStorage.setItem("finalDetails",JSON.stringify(this.finalDetails));
+      
       this.router.navigateByUrl('/payment');
     }
 

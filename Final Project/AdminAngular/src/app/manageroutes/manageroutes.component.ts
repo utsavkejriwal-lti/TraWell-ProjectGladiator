@@ -45,15 +45,15 @@ export class ManageroutesComponent implements OnInit {
 
   AddRoute(){
     var ValidZero = false;
-    var ValidNonzero = false;
+   
     var ValidStop = true;
     var AllDistance = true;
+    if(this.InsertRoutesStops[0].DistanceFromOrigin == 0){
+      ValidZero = true;
+    }
     for(let x =0 ; x < this.InsertRoutesStops.length; x++){
-      if(this.InsertRoutesStops[x].DistanceFromOrigin == 0 && this.InsertRoutesStops[0].DistanceFromOrigin == 0){
-        ValidZero = true;
-      }else{
-        ValidNonzero = true;
-      }
+    
+
       if(!this.ValidateCity(this.InsertRoutesStops[x].Stop1)){
         ValidStop =false;
       }
@@ -66,7 +66,7 @@ export class ManageroutesComponent implements OnInit {
 
     }
 
-    if(!ValidStop || !ValidZero || !ValidNonzero || !AllDistance){
+    if(!ValidStop || !ValidZero  || !AllDistance){
      
       this.routeMessage = '<span class="text-danger">Invalid Details</span>';
     }else{
@@ -101,6 +101,7 @@ export class ManageroutesComponent implements OnInit {
       if(this.placeList[index].Code == city){
        
         found = true;
+        break;
       }
     }
     return found;

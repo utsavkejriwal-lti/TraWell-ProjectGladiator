@@ -18,7 +18,9 @@ namespace TraWellApiProject.Controllers
         public List<DetailedSearchResult> SearchQueryResult(SearchQuery sq)
         {
             List<DetailedSearchResult> detailedSearchResults = new List<DetailedSearchResult>();
+
             List<SearchResult> searchResults = new List<SearchResult>();
+
             List<Place> DepStops = db.Places.Where(p => p.City == sq.FromCity).ToList();
             List<Place> ArrStops = db.Places.Where(p => p.City == sq.ToCity).ToList();
             List<TripStop> DeptripStops = new List<TripStop>();

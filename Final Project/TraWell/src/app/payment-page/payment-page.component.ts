@@ -33,10 +33,9 @@ export class PaymentPageComponent implements OnInit {
     this.finalDetails = this.paymentService.finalDetails;
  
     if(this.finalDetails == undefined){
-      this.finalDetails = JSON.parse(sessionStorage.getItem('finalDetails'));
-      if(this.finalDetails == undefined){
+      
         this.router.navigateByUrl('bookingdetails');
-      }
+      
     }
     
     if(this.finalDetails.Bookings.length > 1){
@@ -46,12 +45,7 @@ export class PaymentPageComponent implements OnInit {
     if(this.IsLoggedIn){
       this.user = this.userService.user;
     }
-    this.userService.userStatussObs.subscribe((data) => {
-      this.IsLoggedIn = data;
-      if(data){
-        this.user = this.userService.user;
-      }
-    })
+   
     
 
     if(!this.IsReturn){
@@ -98,7 +92,7 @@ export class PaymentPageComponent implements OnInit {
               var RemainingPay = this.finalDetails.Bookings[0].Amount - this.user.Wallet;
               this.AddTransaction("Wallet","onward","Debit",WalletPay);
               this.AddTransaction(this.ModeOfPayment,"onward","Debit",RemainingPay);
-              this.AddTransaction(this.ModeOfPayment,"return","Debit",this.finalDetails.Bookings[0].Amount);
+              this.AddTransaction(this.ModeOfPayment,"return","Debit",this.finalDetails.Bookings[1].Amount);
             }
 
           }else{

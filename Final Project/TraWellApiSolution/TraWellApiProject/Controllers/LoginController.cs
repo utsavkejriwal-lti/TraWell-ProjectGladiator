@@ -19,20 +19,8 @@ namespace TraWellApiProject.Controllers
         public Admin AdminLogin(Admin admin)
         {
 
-            //proc_LoginCheck_Result userdata = null;
-            //try
-            //{
-            //    userdata = tra.proc_LoginCheck(admin.Username, admin.Password).First();
-            //}
-            //catch (Exception)
-            //{
 
-            //    return "Invalid Details";
-            //}
-
-            //return admin.Username;
-
-            if(db.Admins.Any(a => a.Username == admin.Username && a.Password == admin.Password))
+            if(db.Admins.Any(a => a.Username == admin.Username && a.Password == admin.Password && a.isActive == 1))
             {
                 return db.Admins.Where(a => a.Username == admin.Username && a.Password == admin.Password).First();
             }
